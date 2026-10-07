@@ -294,6 +294,9 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .perks li { display: flex; gap: .7rem; color: var(--muted); }
 .perks li::before { content: ""; width: .5rem; height: .5rem; margin-top: .55rem; background: var(--gold); border-radius: 50%; flex: none; }
 .perks strong { color: var(--cream); }
+.pamphlet { margin: 1.6rem 0 0; max-width: 62rem; }
+.pamphlet img { width: 100%; display: block; border-radius: 1rem; border: 1px solid rgba(214,168,67,.28); }
+.pamphlet figcaption { margin-top: .7rem; color: var(--muted); font-size: .92rem; }
 
 /* Background food imagery, very light */
 #bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
@@ -939,6 +942,10 @@ html, body { overflow-x: hidden; overflow-x: clip; }
           <li><strong>Collect them all semester.</strong></li>
         </ul>
       </div>
+      <figure class="pamphlet">
+        <img src="pamphlet_mockup.png" alt="Inside the member booklet: the January stamp calendar page and the Intro to Pasta Chef Lab page" loading="lazy">
+        <figcaption>A peek inside the member booklet: your stamp calendar and this semester's first Chef Lab page.</figcaption>
+      </figure>
     </div>
   </section>
 
