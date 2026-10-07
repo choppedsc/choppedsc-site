@@ -956,7 +956,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     { key: "beli-connoisseur", eyebrow: "OUR BELI CONNOISSEUR" },
     { key: "taste-tester", eyebrow: "FEATURED BLIND TASTE TESTER" }
   ];
-  var cake = document.getElementById("cake"), st = document.getElementById("slice-ticket"), busy = false, lastPick = "", served = 0; var spin = 0;
+  var cake = document.getElementById("cake"), st = document.getElementById("slice-ticket"), pending = 0, lastPick = "", served = 0; var spin = 0;
   function pickFeature() {
     for (var tries = 0; tries < 12; tries++) {
       var g = FEATURE_GROUPS[Math.floor(Math.random() * FEATURE_GROUPS.length)];
@@ -969,12 +969,12 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     return { id: lastPick, g: FEATURE_GROUPS[0] };
   }
   cake.addEventListener("click", function () {
-    if (busy) return; busy = true;
     cake.classList.add("taken");
     cake.classList.remove("out");
+    if (pending) clearTimeout(pending);
     spin += 40 + Math.floor(Math.random() * 50);
     cake.querySelector(".pcake").style.transform = "rotate(" + spin + "deg)";
-    setTimeout(function () {
+    pending = setTimeout(function () {
       var p = pickFeature(), s = SEATS[p.id], f = s.f, r = s.role;
       served++;
       document.getElementById("st-num").textContent = "SLICE #" + String(served).padStart(3, "0");
@@ -990,8 +990,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       st.hidden = false; st.style.animation = "none"; void st.offsetWidth; st.style.animation = "";
       cake.classList.add("out");
       document.getElementById("cake-hint").textContent = "Tap for another feature";
-      busy = false;
-    }, 480);
+    }, 400);
   });
 
   // ===== Flip cards =====
