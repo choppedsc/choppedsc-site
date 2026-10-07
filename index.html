@@ -275,6 +275,14 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .perk-badge { width: 8rem; height: 8rem; border-radius: 50%; border: 2px solid var(--gold); outline: 1px solid var(--line); outline-offset: 4px; display: grid; place-content: center; text-align: center; background: var(--cardinal); line-height: 1.1; }
 .perk-badge span { font-size: .62rem; font-weight: 900; letter-spacing: .22em; color: var(--gold); }
 .perk-badge strong { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: .08em; margin: .25rem 0; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 1rem; }
+.team-pos { padding: 1.4rem 1.3rem; display: grid; gap: .45rem; align-content: start; }
+.team-pos .dept { font-size: .72rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.team-pos h3 { font-size: 1.25rem; margin-top: .2rem; }
+.team-pos p { color: var(--muted); margin-top: .35rem; }
+.team-pos .seats-n { font-size: .8rem; color: var(--muted); }
+.team-pos .open-seat { margin-top: auto; font-size: .75rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); padding-top: .6rem; border-top: 1px solid var(--line); }
+
 @media (max-width: 620px) { .founder-perk { grid-template-columns: minmax(0, 1fr); justify-items: start; } }
 
 /* Portfolio tiles + perks */
@@ -474,6 +482,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     <nav class="nav" aria-label="Main">
       <a href="#home">Home</a>
       <a href="#chefs">Meet the Chefs</a>
+      <a href="#team">Meet the Team</a>
       <a href="#join">Why Us</a>
       <a href="#tipsy">Feeling Tipsy</a>
       <a href="#contact">Contact</a>
@@ -652,6 +661,151 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     <div class="wrap">
       <a class="back" href="#chefs">← Meet the Chefs</a>
       <div class="portfolio" id="portfolio"></div>
+    </div>
+  </section>
+</div>
+
+<div class="view" id="view-team" data-view="team">
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="counter"><span class="eyebrow">The people launching Chopped SC</span><span>EST. 2027</span></div>
+      <h1>Meet the founders</h1>
+      <p class="lede">Chopped SC launches with one founder and a founding 20-person e-board. These are the people building it from the ground up.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:1.5rem">
+    <div class="wrap">
+      <a class="card bar founder linkcard" href="#chef-founder">
+        <div class="avatar" aria-hidden="true">EJ</div>
+        <div>
+          <p class="role">Founder · Resident foodie</p>
+          <h3>Evelyn Jones</h3>
+          <p>USC Leventhal School of Accounting. Twelve years in hospitality before USC, now building the kitchen she wanted to find on campus. She founded Chopped SC, and she's assembling its first e-board right now.</p>
+          <span class="view-link">View her full story →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section aria-labelledby="team-04">
+    <div class="wrap">
+      <div class="group-head"><span class="num">04</span><h2 id="team-04">Leadership & operations</h2><p>Every seat below is a founding seat on the 20-person e-board. When it fills, its card becomes that member's own highlight, with their photo and their story.</p></div>
+      <div class="team-grid">
+        <article class="card team-pos">
+          <span class="dept">Leadership & operations</span>
+          <h3>Co-President</h3>
+          <p>Runs the cohorts. Keeps the kitchen brigade, Head Chefs, Pastry Chefs, Sous Chefs and the Beli Connoisseur, working together.</p>
+          <span class="seats-n">1 seat · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Leadership & operations</span>
+          <h3>VP of Operations & Secretary</h3>
+          <p>Reports to the founder. Keeps the club's logistics, records and day-to-day operations in order.</p>
+          <span class="seats-n">1 seat · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Leadership & operations</span>
+          <h3>Treasurer & Finance</h3>
+          <p>Owns the budget. Dues, reimbursements, sponsor reporting and every dollar in and out.</p>
+          <span class="seats-n">2 seats · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="team-07">
+    <div class="wrap">
+      <div class="group-head"><span class="num">07</span><h2 id="team-07">Cooking & experiences</h2><p>Every seat below is a founding seat on the 20-person e-board. When it fills, its card becomes that member's own highlight, with their photo and their story.</p></div>
+      <div class="team-grid">
+        <article class="card team-pos">
+          <span class="dept">Cooking & experiences</span>
+          <h3>Education & Curriculum</h3>
+          <p>Designs what gets taught in Chef Lab and Skills Studio each week.</p>
+          <span class="seats-n">2 seats · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Cooking & experiences</span>
+          <h3>Head Chef Development</h3>
+          <p>Trains and supports the 15 Head Chefs.</p>
+          <span class="seats-n">1 seat · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Cooking & experiences</span>
+          <h3>Sous Chef Development</h3>
+          <p>Mentors the 60 Sous Chefs through their first semester in the kitchen.</p>
+          <span class="seats-n">1 seat · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Cooking & experiences</span>
+          <h3>Events</h3>
+          <p>Plans the club's cook-alongs, blind tastings and campus events.</p>
+          <span class="seats-n">2 seats · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Cooking & experiences</span>
+          <h3>Restaurant Experiences (Beli)</h3>
+          <p>Runs the Saturday Beli Food Tours across LA.</p>
+          <span class="seats-n">1 seat · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="team-08">
+    <div class="wrap">
+      <div class="group-head"><span class="num">08</span><h2 id="team-08">Media & partnerships</h2><p>Every seat below is a founding seat on the 20-person e-board. When it fills, its card becomes that member's own highlight, with their photo and their story.</p></div>
+      <div class="team-grid">
+        <article class="card team-pos">
+          <span class="dept">Media & partnerships</span>
+          <h3>Campus Collaborations</h3>
+          <p>Builds joint events with other USC clubs and organizations.</p>
+          <span class="seats-n">1 seat · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Media & partnerships</span>
+          <h3>Marketing & Social Media</h3>
+          <p>Runs @choppedsc and the club's voice online.</p>
+          <span class="seats-n">2 seats · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Media & partnerships</span>
+          <h3>Videography</h3>
+          <p>Films the kitchen, the plates and the tours.</p>
+          <span class="seats-n">1 seat · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Media & partnerships</span>
+          <h3>Photography & Design</h3>
+          <p>Shoots the dishes and designs everything the club prints and posts.</p>
+          <span class="seats-n">2 seats · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+        <article class="card team-pos">
+          <span class="dept">Media & partnerships</span>
+          <h3>Sponsorship & Partnerships</h3>
+          <p>Brings in sponsors and brand partners to keep the club stocked.</p>
+          <span class="seats-n">2 seats · Founding class</span>
+          <span class="open-seat">Seat open · Highlight coming when filled</span>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section style="padding-bottom:1rem">
+    <div class="wrap">
+      <div class="dm">
+        <p>DM <span class="italic-gold">"BOARD"</span> + your role choice to claim a founding seat</p>
+        <a class="pill ghost" href="https://www.instagram.com/choppedsc/" target="_blank" rel="noopener">Message @choppedsc</a>
+      </div>
     </div>
   </section>
 </div>
@@ -1151,7 +1305,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   setInqType("partnership");
 
   // Page switching: #home, #chefs, #join, #tipsy, #contact, #about, and #chef-<seat> for portfolios
-  var VIEWS = ["home", "chefs", "join", "tipsy", "contact", "about"];
+  var VIEWS = ["home", "chefs", "team", "join", "tipsy", "contact", "about"];
   function show() {
     var h = (location.hash || "#home").slice(1), view = h;
     if (h.indexOf("chef-") === 0) { view = "chef"; renderPortfolio(h.slice(5)); }
