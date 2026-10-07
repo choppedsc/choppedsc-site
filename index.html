@@ -303,6 +303,8 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .cal-hot.active::after { border-color: var(--gold); }
 .cal-drop { overflow: hidden; max-height: 0; transition: max-height .35s ease; background: var(--cardinal); border: 1px solid var(--gold); border-top: 0; border-radius: 0 0 1rem 1rem; margin-top: -1rem; }
 .cal-drop-in { padding: 1.1rem 1.3rem 1.3rem; }
+.cal-drop img.cal-drop-img { width: 100%; display: block; border-radius: .6rem; margin-bottom: .7rem; border: 1px solid rgba(214,168,67,.35); }
+.cal-drop p { margin: 0 0 .5rem; color: var(--cream); font-size: .95rem; line-height: 1.45; }
 .cal-drop h4 { margin: 0; color: var(--gold); font-size: 1.05rem; }
 .cal-drop .when { display: block; margin: .15rem 0 .6rem; color: rgba(246,238,226,.78); font-size: .88rem; }
 .cal-drop ul { margin: 0; padding: 0; list-style: none; }
@@ -1422,7 +1424,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   var DAYS = {
     "12": { t: "Chef Lab · Intro to Pasta", when: "Tuesday, January 12 · 7 PM", lines: ["Fresh egg dough, hand-cut fettuccine", "Cooked in small groups, taught by our Head Chefs", "You leave with your first stamp in the booklet"] },
     "14": { t: "Skills Studio", when: "Thursday, January 14 · 7 PM", lines: ["Demonstrations and recipe workshops on the fundamentals", "First session: orientation and the kitchen walkthrough", "Bring your member kit"] },
-    "16": { t: "Beli Food Tour", when: "Saturday, January 16 · time TBA", lines: ["Restaurant touring across LA, logged and ranked together on Beli", "First tour of the semester", "Meet on campus, we travel together"] }
+    "16": { img: "osteria-la-buca.jpg", t: "Beli Food Tour · Osteria La Buca", when: "Saturday, January 16 · time TBA", p: "Our first tour stops at Osteria La Buca on Melrose, a cozy Italian spot that grew out of a tiny grandma-run kitchen and now draws crowds for its house-made pasta.", lines: ["Signature dish: Spaghetti Cacio e Pepe, called the best in LA", "Bucatini carbonara and the short rib ravioli are regular favorites", "Meet on campus, we travel together"] }
   };
   document.querySelectorAll(".pamphlet").forEach(function (fig) {
     var drop = fig.querySelector(".cal-drop");
@@ -1439,7 +1441,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         if (open === b.dataset.day) { shut(); return; }
         if (open) { var prev = fig.querySelector(".cal-hot[data-day='" + open + "']"); if (prev) prev.classList.remove("active"); }
         var d = DAYS[b.dataset.day];
-        dropIn.innerHTML = "<h4>" + d.t + "</h4><span class=\"when\">" + d.when + "</span><ul>" + d.lines.map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul>";
+        dropIn.innerHTML = (d.img ? '<img class="cal-drop-img" src="' + d.img + '" alt="Osteria La Buca on Melrose">' : '') + "<h4>" + d.t + "</h4><span class=\"when\">" + d.when + "</span>" + (d.p ? "<p>" + d.p + "</p>" : "") + "<ul>" + d.lines.map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul>";
         drop.style.maxHeight = drop.scrollHeight + "px";
         b.classList.add("active");
         open = b.dataset.day;
