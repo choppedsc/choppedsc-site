@@ -114,7 +114,8 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 /* HOME: calendar */
 .cal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
 .cal .dh { background: var(--cardinal); border-radius: 10px; text-align: center; padding: .65rem; font-weight: 900; letter-spacing: .2em; font-size: .9rem; }
-.cal .cell { padding: 1rem 1.1rem; }
+.cal .cell { padding: 1rem 1.1rem; cursor: pointer; text-align: left; font: inherit; }
+.cal .cell.active { outline: 2px solid var(--gold); outline-offset: -2px; }
 .cal .date { font-weight: 900; font-size: .75rem; letter-spacing: .14em; color: var(--gold); font-variant-numeric: tabular-nums; }
 .cal .date .dow { display: none; }
 .cal .what { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; margin-top: .3rem; }
@@ -550,8 +551,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       <div class="counter"><span class="eyebrow">Three ways to cook with us</span><span>TUE · THU · SAT</span></div>
       <div class="sec-head"><h2 id="week-title">Your week at Chopped SC</h2></div>
       <div class="week">
-        <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">TUE</span><span class="fx"><span class="ft">Chef Lab</span><span class="fd">Hands-on cooking in small groups, with sessions taught by our Head Chefs.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">TUE Chef Lab · Opening month</span><span class="ft">First up: Jan 12 · Knife skills</span><span class="tap">← Flip back</span></span></span></button>
-        <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">THU</span><span class="fx"><span class="ft">Skills Studio</span><span class="fd">Demonstrations and recipe workshops. Knife skills, technique and the fundamentals.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">THU Skills Studio · Opening month</span><span class="ft">First up: Jan 14 · Orientation</span><span class="tap">← Flip back</span></span></span></button>
+        <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">TUE</span><span class="fx"><span class="ft">Chef Lab</span><span class="fd">Hands-on cooking in small groups, with sessions taught by our Head Chefs.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">TUE Chef Lab · Opening month</span><span class="ft">First up: Jan 12 · Orientation</span><span class="tap">← Flip back</span></span></span></button>
+        <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">THU</span><span class="fx"><span class="ft">Skills Studio</span><span class="fd">Demonstrations and recipe workshops. Knife skills, technique and the fundamentals.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">THU Skills Studio · Opening month</span><span class="ft">First up: Jan 14 · Knife skills</span><span class="tap">← Flip back</span></span></span></button>
         <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">SAT</span><span class="fx"><span class="ft">Beli Food Tours</span><span class="fd">Restaurant touring across LA. We log and rank every spot together on Beli.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">SAT Beli Food Tours · Opening month</span><span class="ft">First up: Jan 16 · First Beli tour</span><span class="tap">← Flip back</span></span></span></button>
       </div>
       <p class="note"><strong>Every member, every session.</strong> All cooking levels welcome.</p>
@@ -565,14 +566,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       <div class="cal" id="cal">
         <div class="dh">TUE</div><div class="dh">THU</div><div class="dh">SAT</div>
       </div>
-      <figure class="pamphlet">
-        <img src="pamphlet_mockup.png" alt="Inside the member booklet: January with the Intro to Pasta week, and the Intro to Pasta Chef Lab page" loading="lazy">
-        <button type="button" class="cal-hot" style="left:8%;top:63.6%" data-day="12" aria-label="Tuesday, January 12, Intro to Pasta"></button>
-        <button type="button" class="cal-hot" style="left:8%;top:72.1%" data-day="14" aria-label="Thursday, January 14, Skills Studio"></button>
-        <button type="button" class="cal-hot" style="left:8%;top:80.7%" data-day="16" aria-label="Saturday, January 16, Beli Food Tour"></button>
-        <div class="cal-drop"><div class="cal-drop-in"></div></div>
-        <figcaption>A peek inside the member booklet: tap a stamped day and it opens up that day's breakdown.</figcaption>
-      </figure>
+      <div class="cal-drop" id="cal-drop-home"><div class="cal-drop-in" id="cal-drop-home-in"></div></div>
+      <p class="note" style="margin-top:.9rem">Tap a day to see what that session would be.</p>
     </div>
   </section>
 
@@ -1129,17 +1124,45 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 
   // Opening month (from the launch carousel), in date order: Tue, Thu, Sat each week.
   var CAL = [
-    ["TUE","JAN 12","Knife skills"],["THU","JAN 14","Orientation"],["SAT","JAN 16","First Beli tour"],
-    ["TUE","JAN 19","Fresh pasta"],["THU","JAN 21","Dough skills"],["SAT","JAN 23","Pasta outing"],
-    ["TUE","JAN 26","Sauce basics"],["THU","JAN 28","Sauce demo"],["SAT","JAN 30","Beli tour #2"],
-    ["TUE","FEB 2","Pizza dough"],["THU","FEB 4","Mixer demo"],["SAT","FEB 6","Pizza tasting"]
+    ["TUE","JAN 12","Orientation","Chef Lab",["First meet of the semester: orientation and the kitchen walkthrough","Meet your Head Chefs and pick up your member booklet","Tuesday · 7 PM"]],
+    ["THU","JAN 14","Knife skills","Skills Studio",["Skills Studio: knife skills and the fundamentals","Demonstrations and recipe workshops, hands-on in small groups","Thursday · 7 PM"]],
+    ["SAT","JAN 16","First Beli tour","Beli Food Tour",["First Beli food tour of the semester","Restaurant touring across LA, logged and ranked together on Beli","Meet on campus · time TBA"]],
+    ["TUE","JAN 19","Fresh pasta","Chef Lab",["Chef Lab: fresh pasta week","Fresh egg dough and hand-cut shapes, cooked in small groups","Tuesday · 7 PM"]],
+    ["THU","JAN 21","Dough skills","Skills Studio",["Dough demonstrations and recipe workshops","Kneading, resting and shaping techniques","Thursday · 7 PM"]],
+    ["SAT","JAN 23","Pasta outing","Beli Food Tour",["Beli tour: the pasta outing","Touring LA's best pasta spots, logged and ranked on Beli","Time TBA"]],
+    ["TUE","JAN 26","Sauce basics","Chef Lab",["Chef Lab: sauce week","Sauce fundamentals, cooked in small groups","Tuesday · 7 PM"]],
+    ["THU","JAN 28","Sauce demo","Skills Studio",["Sauce demos and workshops","Building pan sauces and classics step by step","Thursday · 7 PM"]],
+    ["SAT","JAN 30","Beli tour #2","Beli Food Tour",["Second Beli food tour","New neighborhoods, new spots, ranked together on Beli","Time TBA"]],
+    ["TUE","FEB 2","Pizza dough","Chef Lab",["Chef Lab: pizza week","Pizza dough from scratch, cooked in small groups","Tuesday · 7 PM"]],
+    ["THU","FEB 4","Mixer demo","Skills Studio",["Mixer demos and workshops","Dough work with the stand mixer, step by step","Thursday · 7 PM"]],
+    ["SAT","FEB 6","Pizza tasting","Beli Food Tour",["Closing event of opening month","Pizza tasting to close out the month","Time TBA"]]
   ];
   var cal = document.getElementById("cal");
-  CAL.forEach(function (c) {
-    var d = document.createElement("div"); d.className = "card cell";
+  var calDrop = document.getElementById("cal-drop-home");
+  var calDropIn = document.getElementById("cal-drop-home-in");
+  var calOpen = null;
+  function shutCal() {
+    calDrop.style.maxHeight = "0px";
+    if (calOpen !== null) { var p = cal.children[calOpen]; if (p) p.classList.remove("active"); }
+    calOpen = null;
+  }
+  CAL.forEach(function (c, i) {
+    var d = document.createElement("button"); d.type = "button"; d.className = "card cell";
+    d.setAttribute("aria-label", c[0] + " " + c[1] + ", " + c[2] + ", tap for details");
     d.innerHTML = '<div class="date"><span class="dow">' + c[0] + ' · </span>' + c[1] + '</div><div class="what">' + c[2] + '</div>';
+    d.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (calOpen === i) { shutCal(); return; }
+      shutCal();
+      calOpen = i;
+      d.classList.add("active");
+      calDropIn.innerHTML = "<h4>" + c[2] + " · " + c[3] + "</h4><span class=\"when\">" + c[0] + " " + c[1] + "</span><ul>" + c[4].map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul>";
+      calDrop.style.maxHeight = calDrop.scrollHeight + "px";
+    });
     cal.appendChild(d);
   });
+  document.addEventListener("click", function () { if (calOpen !== null) shutCal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") shutCal(); });
 
 
   // ===== Cake: each tap serves a random featured member of the brigade =====
