@@ -313,7 +313,6 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .pc-holes { position: absolute; inset: 0; pointer-events: none; transition: opacity .4s ease; }
 .pc-hole.show { opacity: 1; }
 .pc-wedge { filter: drop-shadow(0 16px 22px rgba(0,0,0,.85)) brightness(1.12); }
-.cake-btn.out .pc-wedge { transform: translate(30%, 28%) rotate(-6deg); }
 .pc-base { transition: transform .5s cubic-bezier(.3,.8,.3,1); }
 .cake-btn:hover .pcake { transform: rotate(-2deg); }
 .pcake { transition: transform .5s cubic-bezier(.3,.8,.3,1); }
@@ -971,6 +970,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   cake.addEventListener("click", function () {
     cake.classList.add("taken");
     cake.classList.remove("out");
+    cake.querySelector(".pc-wedge").style.transform = "";
+    document.getElementById("cake-hint").style.opacity = "";
     if (pending) clearTimeout(pending);
     spin += 40 + Math.floor(Math.random() * 50);
     cake.querySelector(".pcake").style.transform = "rotate(" + spin + "deg)";
@@ -989,6 +990,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       l.href = "#chef-" + p.id; l.removeAttribute("target"); l.textContent = f ? "View portfolio \u2192" : "See this seat \u2192"; l.hidden = false;
       st.hidden = false; st.style.animation = "none"; void st.offsetWidth; st.style.animation = "";
       cake.classList.add("out");
+      cake.querySelector(".pc-wedge").style.transform = "rotate(" + (-spin) + "deg) translate(24%, 48%)";
+      document.getElementById("cake-hint").style.opacity = "0";
       document.getElementById("cake-hint").textContent = "Tap for another feature";
     }, 400);
   });
