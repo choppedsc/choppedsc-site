@@ -299,10 +299,14 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .cal-hot { position: absolute; width: 26%; height: 6.6%; border-radius: 14px; background: transparent; border: 0; padding: 0; cursor: pointer; }
 .cal-hot::after { content: ""; position: absolute; inset: 12%; border-radius: 50%; border: 2px solid transparent; transition: border-color .2s; }
 .cal-hot:hover::after, .cal-hot:focus-visible::after { border-color: rgba(246,238,226,.85); }
-.cal-pop { position: absolute; transform: translate(-50%,-50%); background: #2a1013; border: 1px solid var(--gold); border-radius: .9rem; padding: .9rem 1.1rem 1rem; width: min(17rem, 60%); z-index: 6; box-shadow: 0 .8rem 2rem rgba(0,0,0,.55); }
-.cal-pop h4 { margin: 0; color: var(--gold); font-size: 1rem; }
-.cal-pop .when { display: block; margin: .15rem 0 .45rem; color: var(--muted); font-size: .85rem; }
-.cal-pop p { margin: 0; color: var(--cream); font-size: .92rem; line-height: 1.45; }
+.cal-hot.active::after { border-color: var(--gold); }
+.cal-drop { overflow: hidden; max-height: 0; transition: max-height .35s ease; background: #2a1013; border: 1px solid var(--gold); border-top: 0; border-radius: 0 0 1rem 1rem; margin-top: -1rem; }
+.cal-drop-in { padding: 1.1rem 1.3rem 1.3rem; }
+.cal-drop h4 { margin: 0; color: var(--gold); font-size: 1.05rem; }
+.cal-drop .when { display: block; margin: .15rem 0 .6rem; color: var(--muted); font-size: .88rem; }
+.cal-drop ul { margin: 0; padding: 0; list-style: none; }
+.cal-drop li { position: relative; margin: .3rem 0 .3rem 1rem; color: var(--cream); font-size: .95rem; line-height: 1.45; }
+.cal-drop li::before { content: ""; position: absolute; left: -1rem; top: .55em; width: .38rem; height: .38rem; border-radius: 50%; background: var(--gold); }
 .pamphlet img { width: 100%; display: block; border-radius: 1rem; border: 1px solid rgba(214,168,67,.28); }
 .pamphlet figcaption { margin-top: .7rem; color: var(--muted); font-size: .92rem; }
 
@@ -962,8 +966,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         <button type="button" class="cal-hot" style="left:8%;top:63.6%" data-day="12" aria-label="Tuesday, January 12, Intro to Pasta"></button>
         <button type="button" class="cal-hot" style="left:8%;top:72.1%" data-day="14" aria-label="Thursday, January 14, Skills Studio"></button>
         <button type="button" class="cal-hot" style="left:8%;top:80.7%" data-day="16" aria-label="Saturday, January 16, Beli Food Tour"></button>
-        <div class="cal-pop" id="cal-pop" hidden></div>
-        <figcaption>A peek inside the member booklet: tap a stamped day to see what that session is.</figcaption>
+        <div class="cal-drop" id="cal-drop"><div class="cal-drop-in" id="cal-drop-in"></div></div>
+        <figcaption>A peek inside the member booklet: tap a stamped day and it opens up that day's breakdown.</figcaption>
       </figure>
     </div>
   </section>
@@ -1384,26 +1388,33 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 </script>
 <script>
 (function () {
-  var pop = document.getElementById("cal-pop");
+  var drop = document.getElementById("cal-drop");
+  var dropIn = document.getElementById("cal-drop-in");
   var DAYS = {
-    "12": { t: "Chef Lab · Intro to Pasta", when: "Tuesday, Jan 12 · 7 PM", p: "Hands-on cooking in small groups, taught by our Head Chefs. Fresh dough, hand-cut fettuccine, your first stamp in the book." },
-    "14": { t: "Skills Studio", when: "Thursday, Jan 14 · 7 PM", p: "Demonstrations and recipe workshops on the fundamentals. First up: orientation." },
-    "16": { t: "Beli Food Tour", when: "Saturday, Jan 16 · time TBA", p: "Restaurant touring across LA, logged and ranked together on Beli. First tour of the semester." }
+    "12": { t: "Chef Lab · Intro to Pasta", when: "Tuesday, January 12 · 7 PM", lines: ["Fresh egg dough, hand-cut fettuccine", "Cooked in small groups, taught by our Head Chefs", "You leave with your first stamp in the booklet"] },
+    "14": { t: "Skills Studio", when: "Thursday, January 14 · 7 PM", lines: ["Demonstrations and recipe workshops on the fundamentals", "First session: orientation and the kitchen walkthrough", "Bring your member kit"] },
+    "16": { t: "Beli Food Tour", when: "Saturday, January 16 · time TBA", lines: ["Restaurant touring across LA, logged and ranked together on Beli", "First tour of the semester", "Meet on campus, we travel together"] }
   };
   var open = null;
+  function shut() {
+    drop.style.maxHeight = "0px";
+    if (open) { var prev = document.querySelector(".cal-hot[data-day='" + open + "']"); if (prev) prev.classList.remove("active"); }
+    open = null;
+  }
   document.querySelectorAll(".cal-hot").forEach(function (b) {
     b.addEventListener("click", function (e) {
       e.stopPropagation();
+      if (open === b.dataset.day) { shut(); return; }
+      if (open) { var prev = document.querySelector(".cal-hot[data-day='" + open + "']"); if (prev) prev.classList.remove("active"); }
       var d = DAYS[b.dataset.day];
-      if (open === b.dataset.day) { pop.hidden = true; open = null; return; }
-      pop.innerHTML = "<h4>" + d.t + "</h4><span class=\"when\">" + d.when + "</span><p>" + d.p + "</p>";
-      pop.style.left = "40%";
-      pop.style.top = b.style.top;
-      pop.hidden = false; open = b.dataset.day;
+      dropIn.innerHTML = "<h4>" + d.t + "</h4><span class=\"when\">" + d.when + "</span><ul>" + d.lines.map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul>";
+      drop.style.maxHeight = drop.scrollHeight + "px";
+      b.classList.add("active");
+      open = b.dataset.day;
     });
   });
-  document.addEventListener("click", function () { pop.hidden = true; open = null; });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { pop.hidden = true; open = null; } });
+  document.addEventListener("click", function () { if (open) shut(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") shut(); });
 })();
 </script>
 </body>
