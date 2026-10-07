@@ -990,7 +990,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       st.hidden = false; st.style.animation = "none"; void st.offsetWidth; st.style.animation = "";
       cake.classList.add("out");
       document.getElementById("cake-hint").textContent = "Tap for another feature";
-      setTimeout(function () { cake.classList.remove("out"); busy = false; }, 1500);
+      busy = false;
     }, 480);
   });
 
