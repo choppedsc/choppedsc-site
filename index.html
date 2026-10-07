@@ -955,7 +955,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     { key: "beli-connoisseur", eyebrow: "OUR BELI CONNOISSEUR" },
     { key: "taste-tester", eyebrow: "FEATURED BLIND TASTE TESTER" }
   ];
-  var cake = document.getElementById("cake"), st = document.getElementById("slice-ticket"), pending = 0, lastPick = "", served = 0; var spin = 0;
+  var cake = document.getElementById("cake"), st = document.getElementById("slice-ticket"), pending = 0, settle = 0, lastPick = "", served = 0;
   function pickFeature() {
     for (var tries = 0; tries < 12; tries++) {
       var g = FEATURE_GROUPS[Math.floor(Math.random() * FEATURE_GROUPS.length)];
@@ -973,8 +973,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     cake.querySelector(".pc-wedge").style.transform = "";
     document.getElementById("cake-hint").style.opacity = "";
     if (pending) clearTimeout(pending);
-    spin += 40 + Math.floor(Math.random() * 50);
-    cake.querySelector(".pcake").style.transform = "rotate(" + spin + "deg)";
+    if (settle) clearTimeout(settle);
     pending = setTimeout(function () {
       var p = pickFeature(), s = SEATS[p.id], f = s.f, r = s.role;
       served++;
@@ -990,9 +989,14 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       l.href = "#chef-" + p.id; l.removeAttribute("target"); l.textContent = f ? "View portfolio \u2192" : "See this seat \u2192"; l.hidden = false;
       st.hidden = false; st.style.animation = "none"; void st.offsetWidth; st.style.animation = "";
       cake.classList.add("out");
-      cake.querySelector(".pc-wedge").style.transform = "rotate(" + (-spin) + "deg) translate(30%, 45%) scale(0.85)";
+      cake.querySelector(".pc-wedge").style.transform = "translate(30%, 45%) scale(0.85)";
       document.getElementById("cake-hint").style.opacity = "0";
       document.getElementById("cake-hint").textContent = "Tap for another feature";
+      settle = setTimeout(function () {
+        cake.classList.remove("out");
+        cake.querySelector(".pc-wedge").style.transform = "";
+        document.getElementById("cake-hint").style.opacity = "";
+      }, 1500);
     }, 400);
   });
 
