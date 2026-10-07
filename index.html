@@ -295,6 +295,14 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .perks li::before { content: ""; width: .5rem; height: .5rem; margin-top: .55rem; background: var(--gold); border-radius: 50%; flex: none; }
 .perks strong { color: var(--cream); }
 .pamphlet { margin: 1.6rem 0 0; max-width: 62rem; }
+.pamphlet { position: relative; }
+.cal-hot { position: absolute; transform: translate(-50%,-50%); width: 10.5%; aspect-ratio: 1; border-radius: 50%; background: transparent; border: 0; padding: 0; cursor: pointer; }
+.cal-hot::after { content: ""; position: absolute; inset: 12%; border-radius: 50%; border: 2px solid transparent; transition: border-color .2s; }
+.cal-hot:hover::after, .cal-hot:focus-visible::after { border-color: rgba(246,238,226,.85); }
+.cal-pop { position: absolute; transform: translateX(-50%); background: #2a1013; border: 1px solid var(--gold); border-radius: .9rem; padding: .9rem 1.1rem 1rem; width: min(17rem, 60%); z-index: 6; box-shadow: 0 .8rem 2rem rgba(0,0,0,.55); }
+.cal-pop h4 { margin: 0; color: var(--gold); font-size: 1rem; }
+.cal-pop .when { display: block; margin: .15rem 0 .45rem; color: var(--muted); font-size: .85rem; }
+.cal-pop p { margin: 0; color: var(--cream); font-size: .92rem; line-height: 1.45; }
 .pamphlet img { width: 100%; display: block; border-radius: 1rem; border: 1px solid rgba(214,168,67,.28); }
 .pamphlet figcaption { margin-top: .7rem; color: var(--muted); font-size: .92rem; }
 
@@ -944,7 +952,11 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       </div>
       <figure class="pamphlet">
         <img src="pamphlet_mockup.png" alt="Inside the member booklet: the January stamp calendar page and the Intro to Pasta Chef Lab page" loading="lazy">
-        <figcaption>A peek inside the member booklet: your stamp calendar and this semester's first Chef Lab page.</figcaption>
+        <button type="button" class="cal-hot" style="left:22.9%;top:46.1%" data-day="12" aria-label="Tuesday, January 12, Chef Lab"></button>
+        <button type="button" class="cal-hot" style="left:33.3%;top:46.1%" data-day="14" aria-label="Thursday, January 14, Skills Studio"></button>
+        <button type="button" class="cal-hot" style="left:43.7%;top:46.1%" data-day="16" aria-label="Saturday, January 16, Beli Food Tour"></button>
+        <div class="cal-pop" id="cal-pop" hidden></div>
+        <figcaption>A peek inside the member booklet: tap a stamped day to see what that session is.</figcaption>
       </figure>
     </div>
   </section>
@@ -1362,6 +1374,30 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   window.addEventListener("hashchange", sceneFor);
   show();
   sceneFor();
+</script>
+<script>
+(function () {
+  var pop = document.getElementById("cal-pop");
+  var DAYS = {
+    "12": { t: "Chef Lab", when: "Tuesday, Jan 12 · 7 PM", p: "Hands-on cooking in small groups, taught by our Head Chefs. First up: knife skills." },
+    "14": { t: "Skills Studio", when: "Thursday, Jan 14 · 7 PM", p: "Demonstrations and recipe workshops on the fundamentals. First up: orientation." },
+    "16": { t: "Beli Food Tour", when: "Saturday, Jan 16 · time TBA", p: "Restaurant touring across LA, logged and ranked together on Beli. First tour of the semester." }
+  };
+  var open = null;
+  document.querySelectorAll(".cal-hot").forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var d = DAYS[b.dataset.day];
+      if (open === b.dataset.day) { pop.hidden = true; open = null; return; }
+      pop.innerHTML = "<h4>" + d.t + "</h4><span class=\"when\">" + d.when + "</span><p>" + d.p + "</p>";
+      pop.style.left = b.style.left;
+      pop.style.top = "calc(" + b.style.top + " + 7.5%)";
+      pop.hidden = false; open = b.dataset.day;
+    });
+  });
+  document.addEventListener("click", function () { pop.hidden = true; open = null; });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { pop.hidden = true; open = null; } });
+})();
 </script>
 </body>
 </html>
