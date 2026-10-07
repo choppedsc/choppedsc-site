@@ -332,7 +332,6 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 @keyframes hint { 50% { opacity: .45; } }
 .grab-note { position: absolute; top: -0.6rem; left: 50%; z-index: 6; transform: translateX(-50%) rotate(-4deg); background: #ffd84d; color: #2a1a14; font-weight: 900; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; padding: .55rem .9rem; border-radius: 3px; box-shadow: 0 8px 14px rgba(0,0,0,.55), inset 0 -8px 0 rgba(0,0,0,.08); transition: opacity .4s ease, transform .4s ease; pointer-events: none; }
 .grab-note::before { content: ""; position: absolute; top: -7px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff3c4, #c99f2e 70%); box-shadow: 0 2px 4px rgba(0,0,0,.4); }
-.cake-btn.taken ~ .grab-note { opacity: 0; transform: translateX(-50%) rotate(-10deg) translateY(-8px); }
 .slice-ticket { width: min(100%, 22rem); background: #fbf6ec; color: #2a1a14; padding: 1rem 1.2rem 1.4rem; border-radius: 4px; font-family: "Courier Prime", ui-monospace, monospace; box-shadow: 0 18px 30px -12px rgba(0,0,0,.7); transform-origin: top center; animation: tear .5s cubic-bezier(.2,.9,.25,1.2);
   -webkit-mask: radial-gradient(.45rem at 50% 100%, #0000 98%, #000) 50% / .9rem 100%; mask: radial-gradient(.45rem at 50% 100%, #0000 98%, #000) 50% / .9rem 100%; }
 @keyframes tear { from { transform: translateY(-14px) rotate(-3deg); opacity: 0; } }
