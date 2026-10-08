@@ -298,6 +298,7 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .pamphlet { margin: 1.6rem 0 0; max-width: 62rem; }
 .pamphlet { position: relative; }
 .cal-hot { position: absolute; width: 5.4%; height: 8%; border-radius: 8px; background: transparent; border: 0; padding: 0; cursor: pointer; }
+.cal .cell, .cal-hot, .cal-drop { user-select: none; -webkit-user-select: none; }
 .cal-hot::after { content: ""; position: absolute; inset: 12%; border-radius: 50%; border: 2px solid transparent; transition: border-color .2s; }
 .cal-hot:hover::after, .cal-hot:focus-visible::after { border-color: rgba(246,238,226,.85); }
 .cal-hot.active::after { border-color: var(--gold); }
@@ -406,7 +407,7 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .note-paper .pill { background: #8e1b1b; color: #fff; }
 @media (max-width: 620px) {
   .ticket { width: 8.6rem; } .ticket.main { width: 100%; max-width: 17rem; }
-  .tickets .ticket:not(.main) { display: none; }
+  .tickets { justify-content: center; }
   .counter-top { height: 9rem; }
 }
 @media (prefers-reduced-motion: reduce) { .ticket, .cake-hint { animation: none; } }
@@ -473,7 +474,18 @@ footer small { color: var(--muted); }
   .founder { grid-template-columns: minmax(0, 1fr); }
   .teaser { grid-template-columns: minmax(0, 1fr); }
   .dots { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+  .group-head { grid-template-columns: minmax(0, 1fr); gap: .15rem 0; }
+  .group-head .num { grid-row: auto; margin-bottom: .15rem; }
+  .group-head p { max-width: 34rem; }
+  .eb-banner { flex-direction: column; align-items: flex-start; }
 }
+
+.toc { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.3rem; }
+.toc .js-toc { all: unset; cursor: pointer; padding: .45rem .95rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; font-weight: 700; color: var(--cream); }
+.toc .js-toc:hover { border-color: var(--gold); color: var(--gold); }
+.eb-banner { display: flex; gap: 1.2rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 1rem; padding: 1.4rem 1.6rem; border-color: var(--gold); }
+.eb-banner h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); margin-top: .3rem; }
+.eb-banner p:last-child { color: var(--muted); margin-top: .4rem; max-width: 36rem; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
@@ -520,7 +532,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         <h1>CHOPPED<span class="sc">SC</span></h1>
         <div class="rule" aria-hidden="true"></div>
         <p class="tagline italic-gold">USC's test kitchen, where students cook like chefs and eat like critics.</p>
-        <p class="lines">Cook together. Learn together. Tour LA on Beli.</p>
+        <p class="lines">Cook together. Learn together. Eat your way across LA, every stop logged on Beli.</p>
         <div class="stats"><span>Now recruiting</span><span>20-person e-board</span><span>80 members</span></div>
         <div class="hero-cta">
           <a class="pill js-signup" href="https://tinyurl.com/tastychoppedsc" target="_blank" rel="noopener">Sign up for Chopped SC</a>
@@ -553,9 +565,9 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       <div class="counter"><span class="eyebrow">Three ways to cook with us</span><span>TUE · THU · SAT</span></div>
       <div class="sec-head"><h2 id="week-title">Your week at Chopped SC</h2></div>
       <div class="week">
-        <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">TUE</span><span class="fx"><span class="ft">Chef Lab</span><span class="fd">Hands-on cooking in small groups, with sessions taught by our Head Chefs.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">TUE Chef Lab · Opening month</span><span class="ft">First up: Jan 12 · Orientation</span><span class="tap">← Flip back</span></span></span></button>
-        <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">THU</span><span class="fx"><span class="ft">Skills Studio</span><span class="fd">Demonstrations and recipe workshops. Knife skills, technique and the fundamentals.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">THU Skills Studio · Opening month</span><span class="ft">First up: Jan 14 · Knife skills</span><span class="tap">← Flip back</span></span></span></button>
-        <button type="button" class="flip" aria-pressed="false"><span class="flip-in"><span class="card face front"><span class="day">SAT</span><span class="fx"><span class="ft">Beli Food Tours</span><span class="fd">Restaurant touring across LA. We log and rank every spot together on Beli.</span><span class="tap">Tap to flip →</span></span></span><span class="card face back"><span class="eyebrow">SAT Beli Food Tours · Opening month</span><span class="ft">First up: Jan 16 · First Beli tour</span><span class="tap">← Flip back</span></span></span></button>
+        <article class="card"><span class="day">TUE</span><div class="fx"><span class="ft">Chef Lab</span><span class="fd">Hands-on cooking in small groups, with sessions taught by our Head Chefs.</span><span class="tap">First up: Jan 12 · Orientation</span></div></article>
+        <article class="card"><span class="day">THU</span><div class="fx"><span class="ft">Skills Studio</span><span class="fd">Demonstrations and recipe workshops. Knife skills, technique and the fundamentals.</span><span class="tap">First up: Jan 14 · Knife skills</span></div></article>
+        <article class="card"><span class="day">SAT</span><div class="fx"><span class="ft">Beli Food Tours</span><span class="fd">Restaurant touring across LA. We log and rank every spot together on Beli.</span><span class="tap">First up: Jan 16 · First Beli tour</span></div></article>
       </div>
       <p class="note"><strong>Every member, every session.</strong> All cooking levels welcome.</p>
     </div>
@@ -947,6 +959,15 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       <div class="counter"><span class="eyebrow">Spots are limited</span><span>SPRING 2027</span></div>
       <h1>Why us</h1>
       <p class="lede">One dues payment covers it all. 80 member spots plus a 20-person founding e-board, and every new member gets the member kit free. All cooking levels welcome.</p>
+      <nav class="toc" aria-label="Jump to a section">
+        <button type="button" class="js-toc" data-target="kit-title">Member kit</button>
+        <button type="button" class="js-toc" data-target="booklet-title">Member booklet</button>
+        <button type="button" class="js-toc" data-target="brig-title">Kitchen brigade</button>
+        <button type="button" class="js-toc" data-target="hc-title">Head Chefs</button>
+        <button type="button" class="js-toc" data-target="pastry-join-title">Pastry Chefs</button>
+        <button type="button" class="js-toc" data-target="sous-join-title">Sous Chefs</button>
+        <button type="button" class="js-toc" data-target="board-title">Founding e-board</button>
+      </nav>
     </div>
   </section>
 
@@ -958,13 +979,17 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         <article class="card"><span class="big">02</span><div><h3>Chopped SC shirt</h3><p>The club tee, yours with dues.</p></div></article>
         <article class="card light"><span class="big">03</span><div><h3>Member booklet</h3><p>Notes pages plus cooking explanations and details to fill in as you learn.</p></div></article>
       </div>
-      <div class="card perks">
-        <p class="eyebrow">The stamp calendar</p>
-        <ul>
-          <li><strong>Your stamp calendar</strong> lives in the member booklet.</li>
-          <li><strong>A stamp every club meet</strong>, each time you come to the club.</li>
-          <li><strong>Collect them all semester.</strong></li>
-        </ul>
+      <div class="dm" style="margin-top:1.2rem"><p style="color:var(--muted)">The third piece of the kit, the member booklet, gets its own section below.</p></div>
+    </div>
+  </section>
+
+  <section id="booklet" aria-labelledby="booklet-title">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow">Part 03 of the kit · yours to keep</p><h2 id="booklet-title">The member booklet</h2><p class="lede">Your semester companion. Every Chef Lab and Skills Studio session gets its own pages in the book, so what we cook is written down where you can keep it.</p></div>
+      <div class="brigade">
+        <article class="card"><span class="big">A</span><div><h3>Recipes as we cook them</h3><p>Fresh pasta week gets the full recipe: how to start the dough, what kneading actually does, and why we use 00 flour instead of all-purpose.</p></div></article>
+        <article class="card"><span class="big">B</span><div><h3>Technique notes</h3><p>Knife skills week breaks down each cut, why it matters, and the practice drill that makes it stick.</p></div></article>
+        <article class="card"><span class="big">C</span><div><h3>Your stamp calendar</h3><p>Every club meet earns a stamp, and stamps are your access to Beli restaurant touring with the club.</p></div></article>
       </div>
       <figure class="pamphlet">
         <img src="pamphlet_mockup.png" alt="Inside the member booklet: January with the Intro to Pasta week, and the Intro to Pasta Chef Lab page" loading="lazy">
@@ -985,6 +1010,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         <article class="card"><span class="big">05</span><div><h3>Pastry Chefs</h3><p>Lead the club's desserts, breads and bakes.</p></div></article>
         <article class="card light"><span class="big">60</span><div><h3>Sous Chefs</h3><p>Cook, learn and eat with the club all semester.</p></div></article>
       </div>
+      <div class="card red eb-banner"><div><p class="eyebrow">Also now recruiting</p><h3>The founding e-board: 19 open seats</h3><p>Run the club with our founder, from curriculum to camera work. Founding Member title included.</p></div><button type="button" class="pill js-toc" data-target="board-title">See the seats →</button></div>
       <div class="dm"><a class="pill js-signup" href="https://tinyurl.com/tastychoppedsc" target="_blank" rel="noopener">Sign up and pick your position</a></div>
     </div>
   </section>
@@ -1004,6 +1030,31 @@ html, body { overflow-x: hidden; overflow-x: clip; }
           <li><strong>Your food photos, featured</strong> on the site with full credit to you.</li>
           <li><strong>Teach Chef Lab</strong> sessions to our Sous Chefs every Tuesday.</li>
           <li><strong>Cook alongside a 15-chef cohort</strong> of USC's best home cooks.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="pastry-join-title">
+    <div class="wrap">
+      <div class="group-head"><span class="num">05</span><h2 id="pastry-join-title">Pastry Chefs</h2><p>Five seats. They lead the club's desserts, breads and bakes, and run their own bake sessions alongside Chef Lab.</p></div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><h3>Log your interest</h3><p>Choose Pastry Chef on the sign-up form.</p></div></div>
+        <div class="step"><div class="n">2</div><div><h3>Show your bakes</h3><p>Photos of things you've baked, from birthday cakes to weekend loaves. No formal training needed.</p></div></div>
+        <div class="step"><div class="n">3</div><div><h3>Interview with the board</h3><p>Talk bakes, technique and what you'd teach.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sous-join-title">
+    <div class="wrap">
+      <div class="group-head"><span class="num">60</span><h2 id="sous-join-title">Sous Chefs</h2><p>The heart of the kitchen. No interview and no portfolio: pick Sous Chef on the sign-up form and you're in.</p></div>
+      <div class="card perks">
+        <p class="eyebrow">What a Sous Chef gets</p>
+        <ul>
+          <li><strong>Cook every week</strong> in Chef Lab and Skills Studio, hands-on in small groups.</li>
+          <li><strong>A stamp every meet</strong> in your member booklet stamp calendar.</li>
+          <li><strong>Stamps unlock Beli touring</strong>, our Saturday restaurant tours across LA.</li>
         </ul>
       </div>
     </div>
@@ -1057,11 +1108,11 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     <div class="wrap about-grid">
       <div class="body">
         <p>Chopped SC is USC's premier cooking club, for students who love food, whether you've never held a chef's knife or you already cook for your whole floor.</p>
-        <p>We meet three times a week. Tuesdays we cook in Chef Lab, Thursdays we sharpen technique in Skills Studio, and Saturdays we tour LA's restaurants on Beli and talk about what made each plate work.</p>
+        <p>We meet three times a week. Tuesdays we cook in Chef Lab, Thursdays we sharpen technique in Skills Studio, and Saturdays we eat our way across LA's restaurants, logging and ranking every stop together on the Beli app, and talk about what made each plate work.</p>
         <p>The club was founded by Evelyn Jones, a USC Leventhal School of Accounting student who spent 12 years in hospitality before USC. She's bringing what she learned in restaurants to a kitchen full of Trojans.</p>
         <div class="dm"><a class="pill js-signup" href="https://tinyurl.com/tastychoppedsc" target="_blank" rel="noopener">Come cook with us</a></div>
       </div>
-      <p class="pull">Cook together. Learn together. Tour LA on Beli.</p>
+      <p class="pull">Cook together. Learn together. Eat your way across LA, every stop logged on Beli.</p>
     </div>
   </section>
 </div>
@@ -1160,11 +1211,20 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       d.classList.add("active");
       calDropIn.innerHTML = "<h4>" + c[2] + " · " + c[3] + "</h4><span class=\"when\">" + c[0] + " " + c[1] + "</span><ul>" + c[4].map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul>";
       calDrop.style.maxHeight = calDrop.scrollHeight + "px";
+      calDrop.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
     cal.appendChild(d);
   });
   document.addEventListener("click", function () { if (calOpen !== null) shutCal(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") shutCal(); });
+
+  // ===== Jump links (section TOC + banners) =====
+  document.querySelectorAll(".js-toc").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = document.getElementById(b.getAttribute("data-target"));
+      if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
 
 
   // ===== Cake: each tap serves a random featured member of the brigade =====
@@ -1443,6 +1503,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         var d = DAYS[b.dataset.day];
         dropIn.innerHTML = (d.img ? '<img class="cal-drop-img" src="' + d.img + '" alt="Osteria La Buca on Melrose">' : '') + "<h4>" + d.t + "</h4><span class=\"when\">" + d.when + "</span>" + (d.p ? "<p>" + d.p + "</p>" : "") + "<ul>" + d.lines.map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul>";
         drop.style.maxHeight = drop.scrollHeight + "px";
+        drop.scrollIntoView({ behavior: "smooth", block: "nearest" });
         b.classList.add("active");
         open = b.dataset.day;
       });
