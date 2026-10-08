@@ -1670,7 +1670,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     "taste-tester":{ label: "Blind Taste Tester", n: 10, box: "seats-taste", about: "Blind Taste Testers are USC professors who join our blind tastings for one semester. They taste each dish without knowing who made it, score it, and tell us what they'd change. The panel rotates every semester, so new professors get a seat at the table.", sessions: "One semester", link: "tasteTester", prof: true,
       photoNote: "Professor photo goes here",
       facts: function (f) { return [["Role", "Blind Taste Tester"], ["Favorite food genre", (f && f.genre) || "Coming soon"], ["Status", f ? (f.semester || "On the panel") : "Seat open"]]; },
-      side: function (f) { return ["Favorite kitchen gadget", (f && f.gadget) || "Coming soon"]; },
+      side: function (f) { return ["Kitchen item wishlist", (f && f.gadget) || "Coming soon"]; },
       tilesHead: "Portfolio preview · their favorites", tileEm: "Coming soon",
       tiles: [["Favorite restaurant", "Where they'd take you to eat in LA", "restaurant"], ["Signature dish", "What they love to cook at home", "dish"], ["Best plate", "The best plate they've ever photographed", "plate"], ["Favorite cooking show", "What's on their watch list", "show"]] }
   };
