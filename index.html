@@ -1654,7 +1654,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   //                     bio: "Grew up cooking with my grandmother...", photo: "photo-url.jpg" }
   // Blind Taste Testers (professors) show their favorites instead of food photos:
   //   "taste-tester-01": { name: "Prof. Jane Doe", role: "Blind Taste Tester · Spring 2027", semester: "Spring 2027 panel",
-  //                        bio: "...", genre: "Thai", gadget: "Microplane zester", restaurant: "Their favorite LA spot",
+  //                        bio: "...", genre: "Thai", gadget: "Microplane zester", wishlist: "The one kitchen item they'd wish for", restaurant: "Their favorite LA spot",
   //                        dish: "Sunday lasagna", plate: "Their best food photo", show: "Their favorite cooking show", photo: "photo-url.jpg" }
   var FILLED = {
     "founder": {
@@ -1670,7 +1670,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     "taste-tester":{ label: "Blind Taste Tester", n: 10, box: "seats-taste", about: "Blind Taste Testers are USC professors who join our blind tastings for one semester. They taste each dish without knowing who made it, score it, and tell us what they'd change. The panel rotates every semester, so new professors get a seat at the table.", sessions: "One semester", link: "tasteTester", prof: true,
       photoNote: "Professor photo goes here",
       facts: function (f) { return [["Role", "Blind Taste Tester"], ["Favorite food genre", (f && f.genre) || "Coming soon"], ["Status", f ? (f.semester || "On the panel") : "Seat open"]]; },
-      side: function (f) { return ["Kitchen item wishlist", (f && f.gadget) || "Coming soon"]; },
+      side: function (f) { return [["Favorite kitchen gadget", (f && f.gadget) || "Coming soon"], ["Kitchen item wishlist", (f && f.wishlist) || "Coming soon"]]; },
       tilesHead: "Portfolio preview · their favorites", tileEm: "Coming soon",
       tiles: [["Favorite restaurant", "Where they'd take you to eat in LA", "restaurant"], ["Signature dish", "What they love to cook at home", "dish"], ["Best plate", "The best plate they've ever photographed", "plate"], ["Favorite cooking show", "What's on their watch list", "show"]] }
   };
@@ -1714,7 +1714,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     var linkKey = r.link || "join", url = LINKS[linkKey] || IG;
     box.innerHTML =
       '<div class="pf-side"><div class="pf-photo">' + (r.crown ? CROWN : "") + photo + '</div>' +
-        (side ? '<div class="card pf-extra"><p class="eyebrow">' + esc(side[0]) + '</p><p class="pf-extra-v">' + esc(side[1]) + '</p></div>' : '') + '</div>' +
+        (side ? (Array.isArray(side[0]) ? side : [side]).map(function (c) { return '<div class="card pf-extra"><p class="eyebrow">' + esc(c[0]) + '</p><p class="pf-extra-v">' + esc(c[1]) + '</p></div>'; }).join('') : '') + '</div>' +
       '<div class="pf-body">' +
         '<p class="eyebrow">' + esc(f && f.role ? f.role : r.label) + '</p>' +
         '<h1>' + esc(f ? f.name : s.label) + '</h1>' +
