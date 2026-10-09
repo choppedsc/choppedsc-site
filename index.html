@@ -1742,7 +1742,12 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     }
   });
   SEATS["beli-connoisseur"] = { role: { label: "Beli Connoisseur", about: "The Beli Connoisseur is our restaurant expert. They pick the spots for every Saturday Beli Food Tour across LA, keep the club's Beli list and rankings up to date, and lead the table talk on what's on the plate.", sessions: "Leads Saturday tours", link: "join", crown: true, tilesHead: "Their picks", tiles: [["Favorite signature dish", "From a restaurant they've eaten at"], ["Best aesthetic plate", "The most beautiful plate they've seen"], ["Most beautiful restaurant", "The prettiest room they've eaten in"]] }, label: "Beli Connoisseur", f: FILLED["beli-connoisseur"] };
-  SEATS["founder"] = { role: { label: "Founder" }, label: "Founder", f: FILLED["founder"] };
+  SEATS["founder"] = { role: { label: "Founder",
+      facts: function (f) { return [["School", "USC Leventhal"], ["Hospitality", "12 years"], ["Behind the bar", "The Tipsy Barmaid"], ["Favorite food genre", (f && f.genre) || "Coming soon"]]; },
+      side: function (f) { return [["Favorite kitchen gadget", (f && f.gadget) || "Coming soon"], ["Kitchen item wishlist", (f && f.wishlist) || "Coming soon"]]; },
+      tilesHead: "Their favorites", tileEm: "Coming soon",
+      tiles: [["Favorite restaurant", "Where they'd take you to eat in LA", "restaurant"], ["Signature dish", "What they love to cook at home", "dish"], ["Best plate", "The best plate they've ever photographed", "plate"], ["Favorite cooking show", "What's on their watch list", "show"]] },
+    label: "Founder", f: FILLED["founder"] };
 
   // ===== THE OFFICERS (e-board) =====
   // Every officer seat has its own highlight page (#chef-officer-<slug>), like the chef portfolios.
@@ -1804,7 +1809,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         '<h1>' + esc(f ? f.name : s.label) + '</h1>' +
         '<p class="lede">' + esc(f && f.bio ? f.bio : r.about + (f ? "" : (r.officer ? " This seat is open. Once it's filled, this page becomes that officer's own highlight, with their photo and their story." : " This seat is open. Once it's filled, this page becomes their portfolio, with their photo, their story and " + (r.prof ? "their favorites" : "the pictures") + " below."))) + '</p>' +
         '<dl class="facts">' + facts.map(function (x) { return '<div class="card"><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>'; }).join("") + '</dl>' +
-        ((s.label === "Founder" || !r.tiles) ? "" : '<p class="eyebrow">' + esc(r.tilesHead || (f ? "From the kitchen" : "Portfolio preview")) + '</p><div class="dishes' + (tiles.length === 4 ? ' four' : '') + '">' + tiles.map(function (x) {
+        ((!r.tiles) ? "" : '<p class="eyebrow">' + esc(r.tilesHead || (f ? "From the kitchen" : "Portfolio preview")) + '</p><div class="dishes' + (tiles.length === 4 ? ' four' : '') + '">' + tiles.map(function (x) {
           var val = x[2] && f && f[x[2]];
           return '<div class="dish' + (val ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '') + '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + '</div></div>';
         }).join("") + '</div>') +
