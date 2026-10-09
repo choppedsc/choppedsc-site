@@ -229,6 +229,11 @@ a.spot-seat:hover .avatar { transform: scale(1.04); }
 .tipsy-photos .ph { aspect-ratio: 3 / 4; border-radius: 14px; border: 1.5px dashed var(--line); display: grid; place-items: center; text-align: center; color: var(--muted); font-size: .85rem; padding: 1rem; background: linear-gradient(160deg, rgba(142,27,27,.45), rgba(23,13,11,.2)); }
 .tipsy-photos .ph:first-child { grid-column: span 2; aspect-ratio: 16 / 10; }
 .tipsy-photos .ph svg { width: 2.6rem; color: var(--gold); display: block; margin: 0 auto .5rem; }
+.tipsy-menus { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; margin-top: .6rem; }
+.tipsy-menus figure { margin: 0; }
+.tipsy-menus img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--cream-soft, #FBF6EC); display: block; }
+.tipsy-menus figcaption { font-size: .78rem; color: var(--muted); margin-top: .4rem; text-align: center; }
+@media (max-width: 720px) { .tipsy-menus { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .menu-card { padding: 1.5rem; }
 .menu-row { padding: 1rem 0; border-top: 1px solid var(--hair); }
 .menu-row:first-of-type { margin-top: .8rem; }
@@ -1087,6 +1092,20 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       </div>
     </div>
   </section>
+  <section style="padding-top:1.2rem">
+    <div class="wrap">
+      <div class="menu-card card">
+        <p class="eyebrow">From past parties &middot; Recent menus</p>
+        <div class="tipsy-menus">
+          <figure><img src="tipsy/menu-1.png" alt="Sample cocktail menu one" loading="lazy"><figcaption>House lineup</figcaption></figure>
+          <figure><img src="tipsy/mimosa-menu.png" alt="Guava mimosa menu" loading="lazy"><figcaption>Guava mimosa bar</figcaption></figure>
+          <figure><img src="tipsy/mezcal-mule-menu.png" alt="Mezcal mule menu" loading="lazy"><figcaption>Mezcal mule</figcaption></figure>
+          <figure><img src="tipsy/menu-hawaii.jpeg" alt="Hawaii themed cocktail menu" loading="lazy"><figcaption>Hawaii night</figcaption></figure>
+        </div>
+        <p class="note">Every menu can be rebuilt zero proof for your crowd.</p>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ================= CONTACT ================= -->
@@ -1731,9 +1750,9 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 
   // Tipsy Barmaid photo spots (swap for real photos)
   var GLASS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14l-7 9z"/><path d="M12 12v8"/><path d="M8 21h8"/></svg>';
-  var TIPSY_PHOTOS = []; // add photo URLs here, e.g. ["bar-1.jpg", "bar-2.jpg", "bar-3.jpg"]
+  var TIPSY_PHOTOS = ["tipsy/cocktail-rd.jpeg", "tipsy/service.jpeg"];
   var tp = document.getElementById("tipsy-photos");
-  ["Behind the bar", "Signature mocktail", "Party setup"].forEach(function (cap, i) {
+  ["Cocktail R&D", "Bar in service", "Party setup"].forEach(function (cap, i) {
     var d = document.createElement("div"); d.className = "ph";
     d.innerHTML = TIPSY_PHOTOS[i] ? '<img src="' + esc(TIPSY_PHOTOS[i]) + '" alt="' + cap + '" style="width:100%;height:100%;object-fit:cover;border-radius:12px">' : '<div>' + GLASS + cap + '<br><small>Photo coming soon</small></div>';
     if (TIPSY_PHOTOS[i]) d.style.padding = "0";
