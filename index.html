@@ -1706,6 +1706,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   var FILLED = {
     "founder": {
       name: "Evelyn Jones", initials: "EJ", role: "Founder · Resident foodie",
+      photo: "tipsy/evelyn-bar.jpeg",
       bio: "Evelyn spent 12 years in hospitality before coming to USC, where she studies at the Leventhal School of Accounting. She started Chopped SC to build the kitchen she wanted to find on campus. Behind the bar, she's the Tipsy Barmaid, mixing zero-proof drinks for parties.",
       facts: [["School", "USC Leventhal"], ["Hospitality", "12 years"], ["Behind the bar", "The Tipsy Barmaid"]],
       extra: '<a class="pill gold" href="#tipsy">Feeling Tipsy →</a>'
@@ -1819,9 +1820,9 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 
   // Tipsy Barmaid photo spots (swap for real photos)
   var GLASS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14l-7 9z"/><path d="M12 12v8"/><path d="M8 21h8"/></svg>';
-  var TIPSY_PHOTOS = ["tipsy/cocktail-rd.jpeg", "tipsy/service.jpeg", "tipsy/mezcal-purple-coupe.jpg", "tipsy/mezcal-orange-coupe.jpg", "tipsy/mezcal-glass-statue.jpg", "tipsy/evelyn-bar.jpeg"];
+  var TIPSY_PHOTOS = ["tipsy/evelyn-bar.jpeg", "tipsy/cocktail-rd.jpeg", "tipsy/service.jpeg", "tipsy/mezcal-purple-coupe.jpg", "tipsy/mezcal-orange-coupe.jpg", "tipsy/mezcal-glass-statue.jpg"];
   var tp = document.getElementById("tipsy-photos");
-  ["Cocktail R&D", "Bar in service", "Mezcal service at Victorioso", "Signature coupe", "Tasting event pour", "Behind the bar"].forEach(function (cap, i) {
+  ["Behind the bar", "Cocktail R&D", "Bar in service", "Mezcal service at Victorioso", "Signature coupe", "Tasting event pour"].forEach(function (cap, i) {
     var d = document.createElement("div"); d.className = "ph";
     d.innerHTML = TIPSY_PHOTOS[i] ? '<img src="' + esc(TIPSY_PHOTOS[i]) + '" alt="' + cap + '" style="width:100%;height:100%;object-fit:cover;border-radius:12px">' : '<div>' + GLASS + cap + '<br><small>Photo coming soon</small></div>';
     if (TIPSY_PHOTOS[i]) d.style.padding = "0";
