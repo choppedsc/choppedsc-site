@@ -1692,7 +1692,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   //   "taste-tester-01": { name: "Prof. Jane Doe", role: "Blind Taste Tester · Spring 2027", semester: "Spring 2027 panel",
   //                        bio: "...", genre: "Thai", gadget: "Microplane zester", wishlist: "The one kitchen item they'd wish for", restaurant: "Their favorite LA spot",
   //                        dish: "Sunday lasagna", plate: "Their best food photo", show: "Their favorite cooking show", photo: "photo-url.jpg" }
-  // Officers (e-board seats) work the same way: add "officer-<slug>": { name: "Jane Doe", initials: "JD", role: "Co-President \u00b7 Founding class", bio: "...", photo: "photo-url.jpg" } to FILLED to fill one,
+  // Officers (e-board seats) work the same way: add "officer-<slug>": { name: "Jane Doe", initials: "JD", role: "Co-President \u00b7 Founding class", bio: "...", photo: "photo-url.jpg",
+  //   genre: "Their favorite food genre", gadget: "Their favorite kitchen gadget", wishlist: "The one kitchen item they'd wish for", restaurant: "Their favorite LA spot", dish: "What they love to cook at home", plate: "Their best food photo", show: "Their favorite cooking show" } to FILLED to fill one,
   // and update the matching seat card on the Founders page to show their name.
   var FILLED = {
     "founder": {
@@ -1756,7 +1757,10 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   OFFICERS.forEach(function (o) {
     var id = "officer-" + o.slug;
     SEATS[id] = { role: { label: o.title, officer: true, about: o.about, link: "board", photoNote: "Officer photo goes here",
-      facts: function (f) { return (f && f.facts) ? f.facts : [["Pillar", o.pillar], ["Seats", o.seats], ["Status", f ? "Filled" : "Seat open"]]; } },
+      facts: function (f) { return [["Role", o.title], ["Pillar", o.pillar], ["Seats", o.seats], ["Favorite food genre", (f && f.genre) || "Coming soon"], ["Status", f ? "Filled" : "Seat open"]]; },
+      side: function (f) { return [["Favorite kitchen gadget", (f && f.gadget) || "Coming soon"], ["Kitchen item wishlist", (f && f.wishlist) || "Coming soon"]]; },
+      tilesHead: "Their favorites", tileEm: "Coming soon",
+      tiles: [["Favorite restaurant", "Where they'd take you to eat in LA", "restaurant"], ["Signature dish", "What they love to cook at home", "dish"], ["Best plate", "The best plate they've ever photographed", "plate"], ["Favorite cooking show", "What's on their watch list", "show"]] },
       label: o.title, f: FILLED[id] };
   });
   var dots = document.getElementById("dots");
