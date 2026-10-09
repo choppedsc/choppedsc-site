@@ -1697,6 +1697,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   //                     bio: "Grew up cooking with my grandmother...", photo: "photo-url.jpg" }
   // Blind Taste Testers (professors) show their favorites instead of food photos:
   //   "taste-tester-01": { name: "Prof. Jane Doe", role: "Blind Taste Tester · Spring 2027", semester: "Spring 2027 panel",
+  // Optional extras on any tile: <key>Img shows a photo, <key>Link + <key>LinkLabel add a pill link under it. Side cards take [label, value, img, link, linkLabel].
   //                        bio: "...", genre: "Thai", gadget: "Microplane zester", wishlist: "The one kitchen item they'd wish for", restaurant: "Their favorite LA spot",
   //                        dish: "Sunday lasagna", plate: "Their best food photo", show: "Their favorite cooking show", photo: "photo-url.jpg" }
   // Officers (e-board seats) work the same way: add "officer-<slug>": { name: "Jane Doe", initials: "JD", role: "Co-President \u00b7 Founding class", bio: "...", photo: "photo-url.jpg",
@@ -1715,10 +1716,12 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       name: "Abhidha Verma", initials: "AV", role: "Treasurer & Finance · Founding class",
       bio: "Hi! I'm Abhidha, an accounting student at USC. I'm fascinated by astronomy and can spend hours stargazing and exploring the mysteries of the universe. I'm also a huge soccer fan, love Formula 1, reading and exploring new cuisines.",
       photo: "officers/abhidha-headshot.jpg",
-      genre: "Italian/Indian", gadget: "Electric milk frother", wishlist: "Pancake printer",
-      restaurant: "Baar Baar or Mr. Masala", dish: "Paneer butter masala",
+      genre: "Italian/Indian", gadget: "Electric milk frother",
+      restaurant: "Baar Baar or Mr. Masala", restaurantImg: "officers/baar-baar.jpg", restaurantLink: "https://www.instagram.com/baarbaarlosangeles/", restaurantLinkLabel: "Baar Baar on Instagram \u2192",
+      dish: "Paneer butter masala", dishImg: "officers/pbm-a.jpg",
       plate: "Burrata salad, tortellini, veggie pizza and falafel", plateImg: "officers/abhidha-plate.jpg",
-      show: "MasterChef India"
+      show: "MasterChef India", showImg: "officers/mci.jpg", showLink: "https://en.wikipedia.org/wiki/MasterChef_India_(Hindi_TV_series)", showLinkLabel: "About the show \u2192",
+      wishlist: "Pancake printer", wishlistImg: "officers/pancakebot.jpg", wishlistLink: "https://ecohomeoffice.com/products/pancakebot-2-0-3d-pancake-food-printer-nonstick-electric-griddle-with-temperature-control-dispenser-bottle-sd-card-pancake-painter-software-and-recipe-book-black", wishlistLinkLabel: "PancakeBot 2.0 \u2192"
     }
   };
   var ROLES = {
@@ -1783,7 +1786,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       (function (seatNo, id, label) {
         SEATS[id] = { role: { label: o.title, officer: true, about: o.about, link: "board", photoNote: "Officer photo goes here",
           facts: function (f) { return [["Role", o.title], ["Pillar", o.pillar], ["Seats", seatNo], ["Favorite food genre", (f && f.genre) || "Coming soon"], ["Status", f ? "Filled" : "Seat open"]]; },
-          side: function (f) { return [["Favorite kitchen gadget", (f && f.gadget) || "Coming soon"], ["Kitchen item wishlist", (f && f.wishlist) || "Coming soon"]]; },
+          side: function (f) { return [["Favorite kitchen gadget", (f && f.gadget) || "Coming soon"], ["Kitchen item wishlist", (f && f.wishlist) || "Coming soon", f && f.wishlistImg, f && f.wishlistLink, f && f.wishlistLinkLabel]]; },
           tilesHead: "Their favorites", tileEm: "Coming soon",
           tiles: [["Favorite restaurant", "Where they'd take you to eat in LA", "restaurant"], ["Signature dish", "What they love to cook at home", "dish"], ["Best plate", "The best plate they've ever photographed", "plate"], ["Favorite cooking show", "What's on their watch list", "show"]] },
           label: label, f: FILLED[id] };
@@ -1813,7 +1816,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     var linkKey = r.link || "join", url = LINKS[linkKey] || IG;
     box.innerHTML =
       '<div class="pf-side"><div class="pf-photo">' + (r.crown ? CROWN : "") + photo + '</div>' +
-        (side ? (Array.isArray(side[0]) ? side : [side]).map(function (c) { return '<div class="card pf-extra"><p class="eyebrow">' + esc(c[0]) + '</p><p class="pf-extra-v">' + esc(c[1]) + '</p></div>'; }).join('') : '') + '</div>' +
+        (side ? (Array.isArray(side[0]) ? side : [side]).map(function (c) { return '<div class="card pf-extra"><p class="eyebrow">' + esc(c[0]) + '</p><p class="pf-extra-v">' + esc(c[1]) + '</p>' + (c[2] ? '<img src="' + esc(c[2]) + '" alt="' + esc(c[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' : '') + (c[3] ? '<a class="pill gold" href="' + esc(c[3]) + '" target="_blank" rel="noopener">' + esc(c[4] || "Take a look \u2192") + '</a>' : '') + '</div>'; }).join('') : '') + '</div>' +
       '<div class="pf-body">' +
         '<p class="eyebrow">' + esc(f && f.role ? f.role : r.label) + '</p>' +
         '<h1>' + esc(f ? f.name : s.label) + '</h1>' +
@@ -1822,7 +1825,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         ((!r.tiles) ? "" : '<p class="eyebrow">' + esc(r.tilesHead || (f ? "From the kitchen" : "Portfolio preview")) + '</p><div class="dishes' + (tiles.length === 4 ? ' four' : '') + '">' + tiles.map(function (x) {
           var val = x[2] && f && f[x[2]];
           var pimg = x[2] && f && f[x[2] + "Img"];
-          return '<div class="dish' + ((val || pimg) ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '')) + ((val || pimg) ? '' : '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + (pimg ? '<img src="' + esc(pimg) + '" alt="' + esc(x[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' : '') + '</div></div>';
+          return '<div class="dish' + ((val || pimg) ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '')) + ((val || pimg) ? '' : '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + (pimg ? '<img src="' + esc(pimg) + '" alt="' + esc(x[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' : '') + (f && x[2] && f[x[2] + "Link"] ? '<a class="pill gold" href="' + esc(f[x[2] + "Link"]) + '" target="_blank" rel="noopener">' + esc(f[x[2] + "LinkLabel"] || "Take a look \u2192") + '</a>' : '') + '</div></div>';
         }).join("") + '</div>') +
         '<div class="dm">' + (f && f.extra ? f.extra : (f ? "" : (r.prof && !LINKS.tasteTester ? '<a class="pill" href="#contact-professor">Sign up to taste</a>' : '<a class="pill" href="' + url + '" target="_blank" rel="noopener">' + (r.prof ? "Sign up to taste" : "Apply for this seat") + '</a>'))) + '<a class="pill ghost" href="' + (r.officer ? "#team" : "#chefs") + '">' + (r.officer ? "Founders page" : "All chefs") + '</a></div>' +
       '</div>';
