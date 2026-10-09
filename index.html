@@ -685,10 +685,15 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 .pf-extra { padding: 1rem 1.2rem; border-color: var(--gold); background: linear-gradient(120deg, rgba(214,168,67,.16), rgba(214,168,67,.04)); }
 .pf-extra .eyebrow { font-size: .72rem; }
 .pf-extra-v { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin-top: .25rem; }
-.dishes.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.dishes.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .dish .val { font-family: var(--font-display); font-weight: 700; color: var(--gold); font-size: .95rem; margin-top: .45rem; }
 @media (max-width: 900px) { .pf-side { max-width: 22rem; width: 100%; } .pf-side .pf-photo { max-width: none; } }
 @media (max-width: 620px) { .dishes.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.streams { margin-top:.55rem; display:flex; align-items:center; gap:.45rem; flex-wrap:wrap; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.streams b { font-weight:700; margin-right:.1rem; }
+.stream-chip { display:inline-flex; align-items:center; gap:.35rem; border-radius:8px; padding:.22rem .5rem .22rem .26rem; color:#fff; text-decoration:none; font-weight:700; font-size:.68rem; letter-spacing:.02em; text-transform:none; }
+.stream-chip i { display:inline-grid; place-items:center; width:1.15rem; height:1.15rem; border-radius:6px; font-style:normal; font-weight:800; font-size:.52rem; color:#fff; }
+.stream-chip:hover { filter:brightness(1.15); }
 </style>
 </head>
 <body>
@@ -1729,7 +1734,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       restaurant: "Baar Baar or Mr. Masala", restaurantImg: "officers/baar-baar.jpg", restaurantLink: "https://www.instagram.com/baarbaarlosangeles/", restaurantLinkLabel: "Baar Baar on Instagram \u2192",
       dish: "Paneer butter masala", dishImg: "officers/pbm-a.jpg",
       plate: "Burrata salad, tortellini, veggie pizza and falafel", plateImg: "officers/abhidha-plate.jpg",
-      show: "MasterChef India", showImg: "officers/mci.jpg", showLink: "https://en.wikipedia.org/wiki/MasterChef_India_(Hindi_TV_series)", showLinkLabel: "About the show \u2192",
+      show: "MasterChef India", showImg: "officers/mci.jpg", showLink: "https://en.wikipedia.org/wiki/MasterChef_India_(Hindi_TV_series)", showLinkLabel: "About the show \u2192", showImgLink: "https://www.sonyliv.com/shows/masterchef-india-1700001090", showStreams: [{ mark: "LIV", color: "#0B1B33", name: "SonyLIV", url: "https://www.sonyliv.com/shows/masterchef-india-1700001090" }],
       wishlist: "Pancake printer", wishlistImg: "officers/pancakebot.jpg", wishlistLink: "https://ecohomeoffice.com/products/pancakebot-2-0-3d-pancake-food-printer-nonstick-electric-griddle-with-temperature-control-dispenser-bottle-sd-card-pancake-painter-software-and-recipe-book-black", wishlistLinkLabel: "PancakeBot 2.0 \u2192"
     }
   };
@@ -1820,6 +1825,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
            : '<div>' + icon + '<div style="margin-top:.6rem">' + (r.photoNote || "Chef photo goes here") + '</div></div>');
     var facts = r.facts ? r.facts(f) : (f && f.facts ? f.facts : [["Role", r.label], ["Focus", r.sessions || "—"], ["Status", f ? "Filled" : "Seat open"]]);
     if (!r.facts && f && f.year) facts = [["Role", r.label], ["Year", f.year], ["Signature dish", f.dish || "Coming soon"]];
+    if (f && f.birthday) facts = facts.concat([["Birthday", f.birthday]]);
     var side = r.side ? r.side(f) : null; // a small card under the photo
     var tiles = r.tiles || [["Signature dish", ""], ["Best plate", ""], ["Behind the scenes", ""]];
     var linkKey = r.link || "join", url = LINKS[linkKey] || IG;
@@ -1834,7 +1840,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         ((!r.tiles) ? "" : '<p class="eyebrow">' + esc(r.tilesHead || (f ? "From the kitchen" : "Portfolio preview")) + '</p><div class="dishes' + (tiles.length === 4 ? ' four' : '') + '">' + tiles.map(function (x) {
           var val = x[2] && f && f[x[2]];
           var pimg = x[2] && f && f[x[2] + "Img"];
-          return '<div class="dish' + ((val || pimg) ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '')) + ((val || pimg) ? '' : '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + (pimg ? '<img src="' + esc(pimg) + '" alt="' + esc(x[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' : '') + (f && x[2] && f[x[2] + "Link"] ? '<a class="pill gold" href="' + esc(f[x[2] + "Link"]) + '" target="_blank" rel="noopener">' + esc(f[x[2] + "LinkLabel"] || "Take a look \u2192") + '</a>' : '') + '</div></div>';
+          return '<div class="dish' + ((val || pimg) ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '')) + ((val || pimg) ? '' : '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + (pimg ? (f && f[x[2] + "ImgLink"] ? '<a href="' + esc(f[x[2] + "ImgLink"]) + '" target="_blank" rel="noopener" title="Open">' : '') + '<img src="' + esc(pimg) + '" alt="' + esc(x[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' + (f && f[x[2] + "ImgLink"] ? '</a>' : '') : '') + (f && x[2] && f[x[2] + "Link"] ? '<a class="pill gold" href="' + esc(f[x[2] + "Link"]) + '" target="_blank" rel="noopener">' + esc(f[x[2] + "LinkLabel"] || "Take a look \u2192") + '</a>' : '') + (f && x[2] && f[x[2] + "Streams"] ? '<p class="streams"><b>Streaming on</b> ' + f[x[2] + "Streams"].map(function (st) { return '<a class="stream-chip" href="' + esc(st.url) + '" target="_blank" rel="noopener" title="Watch on ' + esc(st.name) + '"><i style="background:' + esc(st.color) + '">' + esc(st.mark) + '</i>' + esc(st.name) + '</a>'; }).join('') + '</p>' : '') + '</div></div>';
         }).join("") + '</div>') +
         '<div class="dm">' + (f && f.extra ? f.extra : (f ? "" : (r.prof && !LINKS.tasteTester ? '<a class="pill" href="#contact-professor">Sign up to taste</a>' : '<a class="pill" href="' + url + '" target="_blank" rel="noopener">' + (r.prof ? "Sign up to taste" : "Apply for this seat") + '</a>'))) + '<a class="pill ghost" href="' + (r.officer ? "#team" : "#chefs") + '">' + (r.officer ? "Founders page" : "All chefs") + '</a></div>' +
       '</div>';
