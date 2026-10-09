@@ -959,7 +959,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
           <h3>Treasurer & Finance</h3>
           <p>Owns the budget. Dues, reimbursements, sponsor reporting and every dollar in and out.</p>
           <span class="seats-n">2 seats · Founding class</span>
-          <span class="open-seat">Seat open · Highlight coming when filled</span>
+          <span class="open-seat">Seat 1: Abhidha Verma · Seat 2 open</span>
         <span class="view-link">View their highlight →</span>
         <span class="dual-links"><a class="view-link" href="#chef-officer-treasurer-1">Seat 1 highlight →</a><a class="view-link" href="#chef-officer-treasurer-2">Seat 2 highlight →</a></span>
         </div>
@@ -1710,6 +1710,15 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       bio: "Evelyn spent 12 years in hospitality before coming to USC, where she studies at the Leventhal School of Accounting. She started Chopped SC to build the kitchen she wanted to find on campus. Behind the bar, she's the Tipsy Barmaid, mixing zero-proof drinks for parties.",
       facts: [["School", "USC Leventhal"], ["Hospitality", "12 years"], ["Behind the bar", "The Tipsy Barmaid"]],
       extra: '<a class="pill gold" href="#tipsy">Feeling Tipsy →</a>'
+    },
+    "officer-treasurer-1": {
+      name: "Abhidha Verma", initials: "AV", role: "Treasurer & Finance · Founding class",
+      bio: "Hi! I'm Abhidha, an accounting student at USC. I'm fascinated by astronomy and can spend hours stargazing and exploring the mysteries of the universe. I'm also a huge soccer fan, love Formula 1, reading and exploring new cuisines.",
+      photo: "officers/abhidha-headshot.jpg",
+      genre: "Italian/Indian", gadget: "Electric milk frother", wishlist: "Pancake printer",
+      restaurant: "Baar Baar or Mr. Masala", dish: "Paneer butter masala",
+      plate: "Burrata salad, tortellini, veggie pizza and falafel", plateImg: "officers/abhidha-plate.jpg",
+      show: "MasterChef India"
     }
   };
   var ROLES = {
@@ -1812,7 +1821,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
         '<dl class="facts">' + facts.map(function (x) { return '<div class="card"><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>'; }).join("") + '</dl>' +
         ((!r.tiles) ? "" : '<p class="eyebrow">' + esc(r.tilesHead || (f ? "From the kitchen" : "Portfolio preview")) + '</p><div class="dishes' + (tiles.length === 4 ? ' four' : '') + '">' + tiles.map(function (x) {
           var val = x[2] && f && f[x[2]];
-          return '<div class="dish' + (val ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '') + '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + '</div></div>';
+          var pimg = x[2] && f && f[x[2] + "Img"];
+          return '<div class="dish' + ((val || pimg) ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '')) + ((val || pimg) ? '' : '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + (pimg ? '<img src="' + esc(pimg) + '" alt="' + esc(x[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' : '') + '</div></div>';
         }).join("") + '</div>') +
         '<div class="dm">' + (f && f.extra ? f.extra : (f ? "" : (r.prof && !LINKS.tasteTester ? '<a class="pill" href="#contact-professor">Sign up to taste</a>' : '<a class="pill" href="' + url + '" target="_blank" rel="noopener">' + (r.prof ? "Sign up to taste" : "Apply for this seat") + '</a>'))) + '<a class="pill ghost" href="' + (r.officer ? "#team" : "#chefs") + '">' + (r.officer ? "Founders page" : "All chefs") + '</a></div>' +
       '</div>';
