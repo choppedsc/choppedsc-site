@@ -1765,6 +1765,11 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   function renderPortfolio(id) {
     var s = SEATS[id], box = document.getElementById("portfolio");
     if (!s) { location.hash = "#chefs"; return; }
+    var back = document.querySelector("#view-chef .back");
+    if (back) {
+      if (id.indexOf("officer-") === 0) { back.href = "#team"; back.textContent = "\u2190 Founders page"; }
+      else { back.href = "#chefs"; back.textContent = "\u2190 Meet the Chefs"; }
+    }
     var r = s.role, f = s.f;
     var icon = r.crown ? PIN : (r.prof ? SPOON : HAT);
     var photo = f && f.photo ? '<img src="' + esc(f.photo) + '" alt="' + esc(f.name) + '" style="width:100%;height:100%;object-fit:cover;border-radius:16px">'
