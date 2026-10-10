@@ -1825,7 +1825,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
            : '<div>' + icon + '<div style="margin-top:.6rem">' + (r.photoNote || "Chef photo goes here") + '</div></div>');
     var facts = r.facts ? r.facts(f) : (f && f.facts ? f.facts : [["Role", r.label], ["Focus", r.sessions || "—"], ["Status", f ? "Filled" : "Seat open"]]);
     if (!r.facts && f && f.year) facts = [["Role", r.label], ["Year", f.year], ["Signature dish", f.dish || "Coming soon"]];
-    if (f && f.birthday) facts = facts.concat([["Birthday", f.birthday]]);
+    if (f && f.birthday) facts = facts.concat([["Birthday", "🎂 " + f.birthday]]);
     var side = r.side ? r.side(f) : null; // a small card under the photo
     var tiles = r.tiles || [["Signature dish", ""], ["Best plate", ""], ["Behind the scenes", ""]];
     var linkKey = r.link || "join", url = LINKS[linkKey] || IG;
