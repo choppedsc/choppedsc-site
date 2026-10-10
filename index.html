@@ -718,6 +718,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   .merch-buy{margin-top:22px;border:1px dashed rgba(212,175,55,.55);border-radius:14px;padding:18px;text-align:center}
   .merch-price{font-size:1.6rem;color:#d4af37;font-weight:700}
   .merch-buy p{margin:.4rem 0 0;font-size:.9rem;color:var(--muted, #b9b1a3)}
+  .merch-pay{display:block;width:100%;margin-top:10px;border:none;border-radius:10px;padding:12px 16px;cursor:pointer;font:inherit;font-weight:700;background:#d4af37;color:#171410}
+  .merch-pay-ghost{background:transparent;color:#f3ede2;border:1px solid rgba(212,175,55,.5)}
 </style>
 </head>
 <body>
@@ -1575,8 +1577,9 @@ html, body { overflow-x: hidden; overflow-x: clip; }
           <div class="merch-buy">
             <p class="merch-buy-title">Checkout</p>
             <p id="merch-summary">Pastel Blue / XS / $52</p>
-            <button class="merch-pay" onclick="merchCheckout()">Pay $52</button>
-            <p class="merch-paynote">Secure checkout. You'll pick payment after your order is placed.</p>
+            <button class="merch-pay" onclick="merchPay()">Pay $52</button>
+            <button class="merch-pay merch-pay-ghost" onclick="merchCheckout()">Order form (color &amp; size)</button>
+            <p class="merch-paynote">Step 1: pay securely with card. Step 2: fill the order form so we get your color and size.</p>
           </div>
         </div>
       </div>
@@ -2137,6 +2140,10 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   }
   function merchPickSize(sz) { merchSize = sz; merchRender(); }
   function merchView(face) { merchFace = face; merchRender(); }
+  var STRIPE_PAY_LINK = "https://buy.stripe.com/5kQ7sM1cofa1bRWaG49Ve00"; // live Stripe payment link, Chopped SC Hoodie $52.00
+  function merchPay() {
+    window.open(STRIPE_PAY_LINK, "_blank", "noopener");
+  }
   function merchCheckout() {
     var url = "https://docs.google.com/forms/d/e/1FAIpQLSd2WZ1eXOQkt0CC6csIQkbVzHnAhkLSkoOqcMkShZUCcad3gA/viewform?entry.1887423328=" + encodeURIComponent(merchColor.name) + "&entry.1658030189=" + encodeURIComponent(merchSize);
     window.open(url, "_blank", "noopener");
