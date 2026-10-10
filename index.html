@@ -701,6 +701,9 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   .merch-stage .merch-pin{position:absolute;width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;border:2px solid #d4af37;background:rgba(20,18,16,.72);color:#f3ede2;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:700;pointer-events:none;animation:merchpin 2.4s ease-in-out infinite}
   @keyframes merchpin{0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,.5)}50%{box-shadow:0 0 0 9px rgba(212,175,55,0)}}
   .merch-note{margin-top:10px;font-size:.85rem;color:var(--muted, #b9b1a3);text-align:center}
+  .merch-bonus{display:flex;align-items:center;gap:.8rem;margin-top:1rem;padding:.7rem .8rem;border:1px dashed rgba(212,175,55,.5);border-radius:14px;background:rgba(255,255,255,.55)}
+  .merch-bonus img{width:72px;height:72px;object-fit:contain;border-radius:12px;background:#fff;flex:0 0 auto;transform:rotate(-3deg)}
+  .merch-bonus p{font-size:.85rem;color:#4a443c;margin:0;line-height:1.45}
   .merch-toggle{display:flex;gap:10px;justify-content:center;margin-top:14px}
   .merch-toggle button{background:transparent;border:1px solid rgba(212,175,55,.5);color:#f3ede2;border-radius:999px;padding:9px 22px;cursor:pointer;font:inherit;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
   .merch-toggle button[aria-pressed="true"]{background:#d4af37;color:#171410;border-color:#d4af37;font-weight:700}
@@ -846,6 +849,31 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       </div>
     </div>
   </section>
+
+<section class="pass" aria-labelledby="pass-title">
+  <div class="wrap">
+    <div class="rail" aria-hidden="true"></div>
+    <div class="tickets">
+      <a class="ticket main js-signup" href="#" target="_blank" rel="noopener">
+        <span class="t-row"><span>ORDER #001</span><span>TABLE 1</span></span>
+        <span class="t-big" id="pass-title">Save your spot at the table</span>
+        <span class="t-row"><span>1x SEAT</span><span>FREE</span></span>
+        <span class="t-cta">SIGN UP →</span>
+      </a>
+      <div class="day-tickets">
+        <span class="ticket"><span class="t-row"><span>TUE</span><span>#002</span></span><span class="t-mid">Chef Lab</span><span class="t-row"><span>1x HEAD CHEF</span></span></span>
+        <span class="ticket"><span class="t-row"><span>THU</span><span>#003</span></span><span class="t-mid">Skills Studio</span><span class="t-row"><span>1x KNIFE</span></span></span>
+        <span class="ticket"><span class="t-row"><span>SAT</span><span>#004</span></span><span class="t-mid">Beli Food Tour</span><span class="t-row"><span>1x APPETITE</span></span></span>
+      </div>
+    </div>
+    <div class="counter-top">
+      <div class="note-paper">
+        <p class="np-1">Launching Spring 2027</p>
+        <p class="np-2">Grab the order ticket above. Sign-ups take about two minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 </div>
 
@@ -1514,32 +1542,6 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 </div>
 </main>
 
-<section class="pass" aria-labelledby="pass-title">
-  <div class="wrap">
-    <div class="rail" aria-hidden="true"></div>
-    <div class="tickets">
-      <a class="ticket main js-signup" href="#" target="_blank" rel="noopener">
-        <span class="t-row"><span>ORDER #001</span><span>TABLE 1</span></span>
-        <span class="t-big" id="pass-title">Save your spot at the table</span>
-        <span class="t-row"><span>1x SEAT</span><span>FREE</span></span>
-        <span class="t-cta">SIGN UP →</span>
-      </a>
-      <div class="day-tickets">
-        <span class="ticket"><span class="t-row"><span>TUE</span><span>#002</span></span><span class="t-mid">Chef Lab</span><span class="t-row"><span>1x HEAD CHEF</span></span></span>
-        <span class="ticket"><span class="t-row"><span>THU</span><span>#003</span></span><span class="t-mid">Skills Studio</span><span class="t-row"><span>1x KNIFE</span></span></span>
-        <span class="ticket"><span class="t-row"><span>SAT</span><span>#004</span></span><span class="t-mid">Beli Food Tour</span><span class="t-row"><span>1x APPETITE</span></span></span>
-      </div>
-    </div>
-    <div class="counter-top">
-      <div class="note-paper">
-        <p class="np-1">Launching Spring 2027</p>
-        <p class="np-2">Grab the order ticket above. Sign-ups take about two minutes.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <div class="view" id="view-merch" data-view="merch">
   <section class="page-hero">
     <div class="container">
@@ -1554,28 +1556,32 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       <div class="merch-grid">
         <div>
           <div class="merch-stage" id="merch-stage">
-            <img id="merch-img" src="merch/hoodie-front-black.png" alt="Chopped SC cat-ear hoodie">
+            <img id="merch-img" src="merch/hoodie-front-blue.png" alt="Chopped SC cat-ear hoodie">
           </div>
           <div class="merch-toggle">
             <button id="btn-front" aria-pressed="true" onclick="merchView('front')">Front</button>
             <button id="btn-back" aria-pressed="false" onclick="merchView('back')">Back</button>
           </div>
-          <p class="merch-note" id="merch-note">Front shown with the club crest. Colors are digital samples; real-garment photos coming soon.</p>
+          <p class="merch-note" id="merch-note">Pastel Blue shown with the club crest, real product mockup. Other colors are digital samples; real-garment photos coming soon.</p>
         </div>
 
         <div class="merch-panel">
           <p class="merch-kicker">MERCH DROP 001</p>
           <h3>Cat-ear crop hoodie</h3>
           <p class="merch-desc">Lace-up front, cat-ear hood, cropped fit. Paw prints on the cuffs in pink and blue. Back design finishing now.</p>
+          <div class="merch-bonus">
+            <img src="merch/sticker-idiot-sandwich.png" alt="Free grumpy-cat idiot sandwich sticker">
+            <p><strong>Free sticker included.</strong> Every hoodie ships with the grumpy-chef "idiot sandwich" sticker.</p>
+          </div>
           <div class="merch-price">$52</div>
           <p class="merch-size-label">Color</p>
           <div class="swatches" id="swatches"></div>
-          <p class="swatch-name" id="swatch-name">Black</p>
+          <p class="swatch-name" id="swatch-name">Pastel Blue</p>
           <p class="merch-size-label">Size</p>
           <div class="size-row" id="size-row"></div>
           <div class="merch-buy">
             <p class="merch-buy-title">Checkout</p>
-            <p id="merch-summary">Black / XS / $52</p>
+            <p id="merch-summary">Pastel Blue / XS / $52</p>
             <button class="merch-pay" onclick="merchCheckout()">Pay $52</button>
             <p class="merch-paynote">Secure checkout. You'll pick payment after your order is placed.</p>
           </div>
@@ -2109,8 +2115,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 <script>
   // ===== MERCH =====
   var MERCH_COLORS = [
-    { id: "black", name: "Black", dot: "#1d1b19", front: "merch/hoodie-front-black.png" },
     { id: "blue", name: "Pastel Blue", dot: "#a9cfe0", front: "merch/hoodie-front-blue.png" },
+    { id: "black", name: "Black", dot: "#1d1b19", front: "merch/hoodie-front-black.png" },
     { id: "pink", name: "Pink", dot: "#eab3bf", front: "merch/hoodie-front-pink.png" },
     { id: "cream", name: "Cream", dot: "#efe5d3", front: "merch/hoodie-front-cream.png" }
   ];
