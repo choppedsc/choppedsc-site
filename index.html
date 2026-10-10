@@ -694,6 +694,27 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 .stream-chip { display:inline-flex; align-items:center; gap:.35rem; border-radius:8px; padding:.22rem .5rem .22rem .26rem; color:#fff; text-decoration:none; font-weight:700; font-size:.68rem; letter-spacing:.02em; text-transform:none; }
 .stream-chip i { display:inline-grid; place-items:center; width:1.15rem; height:1.15rem; border-radius:6px; font-style:normal; font-weight:800; font-size:.52rem; color:#fff; }
 .stream-chip:hover { filter:brightness(1.15); }
+
+  /* ===== MERCH ===== */
+  .merch-stage{position:relative;border-radius:18px;overflow:hidden;background:#efece7;border:1px solid rgba(212,175,55,.35);cursor:crosshair}
+  .merch-stage img{width:100%;display:block}
+  .merch-stage .merch-pin{position:absolute;width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;border:2px solid #d4af37;background:rgba(20,18,16,.72);color:#f3ede2;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:700;pointer-events:none;animation:merchpin 2.4s ease-in-out infinite}
+  @keyframes merchpin{0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,.5)}50%{box-shadow:0 0 0 9px rgba(212,175,55,0)}}
+  .merch-note{margin-top:10px;font-size:.85rem;color:var(--muted, #b9b1a3);text-align:center}
+  .merch-toggle{display:flex;gap:10px;justify-content:center;margin-top:14px}
+  .merch-toggle button{background:transparent;border:1px solid rgba(212,175,55,.5);color:#f3ede2;border-radius:999px;padding:9px 22px;cursor:pointer;font:inherit;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+  .merch-toggle button[aria-pressed="true"]{background:#d4af37;color:#171410;border-color:#d4af37;font-weight:700}
+  .swatches{display:flex;gap:14px;justify-content:center;margin-top:18px}
+  .swatch{width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.25);cursor:pointer;position:relative;outline:none}
+  .swatch[aria-pressed="true"]{border-color:#d4af37;box-shadow:0 0 0 3px rgba(212,175,55,.35)}
+  .swatch:hover{transform:scale(1.08)}
+  .swatch-name{text-align:center;margin-top:10px;font-size:.85rem;color:#f3ede2;letter-spacing:.08em;text-transform:uppercase}
+  .size-row{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+  .size-chip{border:1px solid rgba(212,175,55,.5);background:transparent;color:#f3ede2;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit;font-size:.85rem}
+  .size-chip[aria-pressed="true"]{background:#d4af37;color:#171410;font-weight:700;border-color:#d4af37}
+  .merch-buy{margin-top:22px;border:1px dashed rgba(212,175,55,.55);border-radius:14px;padding:18px;text-align:center}
+  .merch-price{font-size:1.6rem;color:#d4af37;font-weight:700}
+  .merch-buy p{margin:.4rem 0 0;font-size:.9rem;color:var(--muted, #b9b1a3)}
 </style>
 </head>
 <body>
@@ -712,7 +733,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       <a href="#team">Founders</a>
       <a href="#join">Why Us</a>
       <a href="#booklet">Booklet</a>
-      <a href="#tipsy">Feeling Tipsy</a>
+      <a href="#merch">Merch</a><a href="#tipsy">Feeling Tipsy</a>
       <a href="#contact">Contact</a>
       <a href="#about">About</a>
     </nav>
@@ -1518,6 +1539,52 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   </div>
 </section>
 
+
+<div class="view" id="view-merch" data-view="merch">
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Merch</p>
+      <h1>The Chopped SC hoodie</h1>
+      <p>The cat-ear lace-up crop hoodie. Club crest on the front, paw-print cuffs, back art by the founder. Members get first dibs before the public drop.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:1.5rem">
+    <div class="container">
+      <div class="merch-grid">
+        <div>
+          <div class="merch-stage" id="merch-stage">
+            <img id="merch-img" src="merch/hoodie-front-black.png" alt="Chopped SC cat-ear hoodie">
+          </div>
+          <div class="merch-toggle">
+            <button id="btn-front" aria-pressed="true" onclick="merchView('front')">Front</button>
+            <button id="btn-back" aria-pressed="false" onclick="merchView('back')">Back</button>
+          </div>
+          <p class="merch-note" id="merch-note">Front shown with the club crest. Colors are digital samples; real-garment photos coming soon.</p>
+        </div>
+
+        <div class="merch-panel">
+          <p class="merch-kicker">MERCH DROP 001</p>
+          <h3>Cat-ear crop hoodie</h3>
+          <p class="merch-desc">Lace-up front, cat-ear hood, cropped fit. Paw prints on the cuffs in pink and blue. Back design finishing now.</p>
+          <div class="merch-price">$52</div>
+          <p class="merch-size-label">Color</p>
+          <div class="swatches" id="swatches"></div>
+          <p class="swatch-name" id="swatch-name">Black</p>
+          <p class="merch-size-label">Size</p>
+          <div class="size-row" id="size-row"></div>
+          <div class="merch-buy">
+            <p class="merch-buy-title">Checkout</p>
+            <p id="merch-summary">Black / XS / $52</p>
+            <button class="merch-pay" onclick="merchCheckout()">Pay $52</button>
+            <p class="merch-paynote">Secure checkout. You'll pick payment after your order is placed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 <footer>
   <div class="wrap">
     <span class="wordmark" style="margin:0">CHOPPED SC</span>
@@ -1935,7 +2002,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 
   // Page switching: #home, #chefs, #team, #join, #tipsy, #contact, #about, #chef-<seat> for portfolios,
   // and #page/section-id to jump straight to a section (for example #join/booklet-title)
-  var VIEWS = ["home", "chefs", "team", "join", "booklet", "tipsy", "contact", "about"];
+  var VIEWS = ["home", "chefs", "team", "join", "booklet", "tipsy", "merch", "contact", "about"];
   function setHeadH() {
     // menu on one line when it fits; otherwise it drops to a second row
     var w = document.querySelector(".site-head .wrap"), top = w.querySelector(".brand").getBoundingClientRect().top + 8;
@@ -2038,6 +2105,87 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") shut(); });
   });
 })();
+</script>
+<script>
+  // ===== MERCH =====
+  var MERCH_COLORS = [
+    { id: "black", name: "Black", dot: "#1d1b19", front: "merch/hoodie-front-black.png" },
+    { id: "blue", name: "Pastel Blue", dot: "#a9cfe0", front: "merch/hoodie-front-blue.png" },
+    { id: "pink", name: "Pink", dot: "#eab3bf", front: "merch/hoodie-front-pink.png" },
+    { id: "cream", name: "Cream", dot: "#efe5d3", front: "merch/hoodie-front-cream.png" }
+  ];
+  var MERCH_SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
+  var merchColor = MERCH_COLORS[0], merchSize = "XS", merchFace = "front";
+
+  function merchRender() {
+    var img = document.getElementById("merch-img");
+    if (img) img.src = merchFace === "back" ? "merch/hoodie-back.png" : merchColor.front;
+    var f = document.getElementById("btn-front"), b = document.getElementById("btn-back");
+    if (f) f.setAttribute("aria-pressed", merchFace === "front");
+    if (b) b.setAttribute("aria-pressed", merchFace === "back");
+    var sn = document.getElementById("swatch-name");
+    if (sn) sn.textContent = merchColor.name;
+    var sum = document.getElementById("merch-summary");
+    if (sum) sum.textContent = merchColor.name + " / " + merchSize + " / $52";
+    var pay = document.querySelector(".merch-pay");
+    if (pay) pay.textContent = "Pay $52";
+    var dots = document.querySelectorAll("#swatches .swatch");
+    for (var i = 0; i < dots.length; i++) dots[i].setAttribute("aria-pressed", MERCH_COLORS[i].id === merchColor.id ? "true" : "false");
+    var chips = document.querySelectorAll("#size-row .size-chip");
+    for (var j = 0; j < chips.length; j++) chips[j].setAttribute("aria-pressed", MERCH_SIZES[j] === merchSize ? "true" : "false");
+  }
+  function merchPickColor(id) {
+    for (var i = 0; i < MERCH_COLORS.length; i++) if (MERCH_COLORS[i].id === id) merchColor = MERCH_COLORS[i];
+    if (merchFace === "back") merchFace = "front";
+    merchRender();
+  }
+  function merchPickSize(sz) { merchSize = sz; merchRender(); }
+  function merchView(face) { merchFace = face; merchRender(); }
+  function merchCheckout() {
+    var url = "https://docs.google.com/forms/d/e/1FAIpQLSd2WZ1eXOQkt0CC6csIQkbVzHnAhkLSkoOqcMkShZUCcad3gA/viewform?entry.1887423328=" + encodeURIComponent(merchColor.name) + "&entry.1658030189=" + encodeURIComponent(merchSize);
+    window.open(url, "_blank", "noopener");
+  }
+
+  (function merchInit() {
+    var sw = document.getElementById("swatches");
+    if (sw) {
+      MERCH_COLORS.forEach(function (c) {
+        var b = document.createElement("button");
+        b.className = "swatch"; b.style.background = c.dot;
+        b.setAttribute("aria-label", c.name); b.setAttribute("aria-pressed", "false");
+        b.onclick = function () { merchPickColor(c.id); };
+        sw.appendChild(b);
+      });
+    }
+    var row = document.getElementById("size-row");
+    if (row) {
+      MERCH_SIZES.forEach(function (sz) {
+        var b = document.createElement("button");
+        b.className = "size-chip"; b.textContent = sz;
+        b.setAttribute("aria-pressed", "false");
+        b.onclick = function () { merchPickSize(sz); };
+        row.appendChild(b);
+      });
+    }
+    merchRender();
+  })();
+  // Merch hotspots: tapping the cuff or pouch flips to the back
+  (function merchHotspots() {
+    var stage = document.getElementById("merch-stage");
+    if (!stage) return;
+    [["8%", "88%"], ["92%", "88%"], ["50%", "78%"]].forEach(function (pos) {
+      var p = document.createElement("span");
+      p.className = "merch-pin"; p.textContent = "\u21bb";
+      p.style.left = pos[0]; p.style.top = pos[1];
+      p.title = "See the back";
+      stage.appendChild(p);
+    });
+    stage.addEventListener("click", function (e) {
+      var r = stage.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      if ((x < 0.14 && y > 0.78) || (x > 0.86 && y > 0.78) || (y > 0.72 && y < 0.9 && x > 0.3 && x < 0.7)) merchView("back");
+    });
+  })();
 </script>
 <script>
   // ===== VISIT COUNTER =====
