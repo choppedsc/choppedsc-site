@@ -1558,10 +1558,6 @@ html, body { overflow-x: hidden; overflow-x: clip; }
           <div class="merch-stage" id="merch-stage">
             <img id="merch-img" src="merch/hoodie-front-blue.png" alt="Chopped SC cat-ear hoodie">
           </div>
-          <div class="merch-toggle">
-            <button id="btn-front" aria-pressed="true" onclick="merchView('front')">Front</button>
-            <button id="btn-back" aria-pressed="false" onclick="merchView('back')">Back</button>
-          </div>
           <p class="merch-note" id="merch-note">Pastel Blue shown with the club crest, real product mockup. More colors dropping soon.</p>
         </div>
 
@@ -2168,23 +2164,6 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       });
     }
     merchRender();
-  })();
-  // Merch hotspots: tapping the cuff or pouch flips to the back
-  (function merchHotspots() {
-    var stage = document.getElementById("merch-stage");
-    if (!stage) return;
-    [["8%", "88%"], ["92%", "88%"], ["50%", "78%"]].forEach(function (pos) {
-      var p = document.createElement("span");
-      p.className = "merch-pin"; p.textContent = "\u21bb";
-      p.style.left = pos[0]; p.style.top = pos[1];
-      p.title = "See the back";
-      stage.appendChild(p);
-    });
-    stage.addEventListener("click", function (e) {
-      var r = stage.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      if ((x < 0.14 && y > 0.78) || (x > 0.86 && y > 0.78) || (y > 0.72 && y < 0.9 && x > 0.3 && x < 0.7)) merchView("back");
-    });
   })();
 </script>
 <script>
