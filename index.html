@@ -2039,5 +2039,16 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   });
 })();
 </script>
+<script>
+  // ===== VISIT COUNTER =====
+  // Privacy-friendly: each page load logs only the page path and a timestamp to the club's own visit-log form. No cookies, no personal data.
+  (function () {
+    try {
+      var fd = new FormData();
+      fd.append("entry.1568385298", location.pathname === "/" ? "home" : location.pathname + location.hash);
+      fetch("https://docs.google.com/forms/d/e/1FAIpQLScP9nQlq3HJsObclj2nCt_8PRxw9oFF1w_cA1PR7PLqo-S_qA/formResponse", { method: "POST", mode: "no-cors", body: fd });
+    } catch (e) {}
+  })();
+</script>
 </body>
 </html>
