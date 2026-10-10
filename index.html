@@ -1562,7 +1562,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
             <button id="btn-front" aria-pressed="true" onclick="merchView('front')">Front</button>
             <button id="btn-back" aria-pressed="false" onclick="merchView('back')">Back</button>
           </div>
-          <p class="merch-note" id="merch-note">Pastel Blue shown with the club crest, real product mockup. Other colors are digital samples; real-garment photos coming soon.</p>
+          <p class="merch-note" id="merch-note">Pastel Blue shown with the club crest, real product mockup. More colors dropping soon.</p>
         </div>
 
         <div class="merch-panel">
@@ -1574,9 +1574,6 @@ html, body { overflow-x: hidden; overflow-x: clip; }
             <p><strong>Free sticker included.</strong> Every hoodie ships with the grumpy-chef "idiot sandwich" sticker.</p>
           </div>
           <div class="merch-price">$52</div>
-          <p class="merch-size-label">Color</p>
-          <div class="swatches" id="swatches"></div>
-          <p class="swatch-name" id="swatch-name">Pastel Blue</p>
           <p class="merch-size-label">Size</p>
           <div class="size-row" id="size-row"></div>
           <div class="merch-buy">
@@ -2115,10 +2112,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 <script>
   // ===== MERCH =====
   var MERCH_COLORS = [
-    { id: "blue", name: "Pastel Blue", dot: "#a9cfe0", front: "merch/hoodie-front-blue.png" },
-    { id: "black", name: "Black", dot: "#1d1b19", front: "merch/hoodie-front-black.png" },
-    { id: "pink", name: "Pink", dot: "#eab3bf", front: "merch/hoodie-front-pink.png" },
-    { id: "cream", name: "Cream", dot: "#efe5d3", front: "merch/hoodie-front-cream.png" }
+    { id: "blue", name: "Pastel Blue", dot: "#a9cfe0", front: "merch/hoodie-front-blue.png" }
   ];
   var MERCH_SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
   var merchColor = MERCH_COLORS[0], merchSize = "XS", merchFace = "front";
