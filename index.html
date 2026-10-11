@@ -1807,13 +1807,21 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     "founder": {
       name: "Evelyn Jones", initials: "EJ", role: "Founder · Resident foodie",
       photo: "officers/evelyn-president.jpg",
-      bio: "Evelyn spent 12 years in hospitality before coming to USC, where she studies at the Leventhal School of Accounting. She started Chopped SC to build the kitchen she wanted to find on campus. Behind the bar, she's the Tipsy Barmaid, mixing zero-proof drinks for parties.",
-      dish: "Sticky toffee pudding",
-      dishLink: "https://www.youtube.com/watch?v=dNs2y12zgIg",
-      dishLinkLabel: "Find out how to make it \u2192",
-      dishImg: "officers/sticky-toffee-pudding.jpg",
+      bio: "Evelyn spent 12 years in hospitality before coming to USC, where she studies at the Leventhal School of Accounting. She's been cooking since she was five. She started Chopped SC to build the kitchen she wanted to find on campus. Behind the bar, she's the Tipsy Barmaid, mixing zero-proof drinks for parties.",
+      genre: "Japanese & Italian", birthday: "October 22",
+      gadget: "Ninja pressure cooker", wishlist: "AnkerMake 3D printer",
+      restaurant: "Bacari Silverlake", show: "Iron Chef OG",
       facts: [["School", "USC Leventhal"], ["Hospitality", "12 years"], ["Behind the bar", "The Tipsy Barmaid"]],
-      extra: '<a class="pill gold" href="#tipsy">Feeling Tipsy →</a>'
+      extra: '<a class="pill gold" href="#tipsy">Feeling Tipsy →</a>',
+      gallery: [
+        { src: "officers/sticky-toffee-pudding.jpg", cap: "Sticky toffee pudding" },
+        { src: "officers/evelyn-01.jpg", cap: "Charcuterie board" },
+        { src: "officers/evelyn-02.jpg", cap: "Berry and mango tart" },
+        { src: "officers/evelyn-03.jpg", cap: "Dill cream salmon" },
+        { src: "officers/evelyn-04.jpg", cap: "Chocolate strawberry cheesecake" },
+        { src: "officers/evelyn-05.jpg", cap: "Mango blueberry tart" },
+        { src: "officers/evelyn-06.jpg", cap: "Chocolate dome cake" },
+      ],
     },
     "officer-treasurer-1": {
       name: "Abhidha Verma", initials: "AV", birthday: "July 5", role: "Treasurer & Finance · Founding class",
@@ -1953,6 +1961,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
           var pimg = x[2] && f && f[x[2] + "Img"];
           return '<div class="dish' + ((val || pimg) ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '')) + ((val || pimg) ? '' : '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + (pimg ? (f && f[x[2] + "ImgLink"] ? '<a href="' + esc(f[x[2] + "ImgLink"]) + '" target="_blank" rel="noopener" title="Open">' : '') + '<img src="' + esc(pimg) + '" alt="' + esc(x[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' + (f && f[x[2] + "ImgLink"] ? '</a>' : '') : '') + (f && x[2] && f[x[2] + "Link"] ? '<a class="pill gold" href="' + esc(f[x[2] + "Link"]) + '" target="_blank" rel="noopener">' + esc(f[x[2] + "LinkLabel"] || "Take a look \u2192") + '</a>' : '') + (f && x[2] && f[x[2] + "Streams"] ? '<p class="streams"><b>Streaming on</b> ' + f[x[2] + "Streams"].map(function (st) { return '<a class="stream-chip" href="' + esc(st.url) + '" target="_blank" rel="noopener" title="Watch on ' + esc(st.name) + '"><i style="background:' + esc(st.color) + '">' + esc(st.mark) + '</i>' + esc(st.name) + '</a>'; }).join('') + '</p>' : '') + '</div></div>';
         }).join("") + '</div>') +
+        (f && f.gallery ? '<p class="eyebrow">' + esc(f.galleryHead || "From her kitchen") + '</p><div class="dishes four">' + f.gallery.map(function (g) { return '<div class="dish has"><div><img src="' + esc(g.src) + '" alt="' + esc(g.cap || "kitchen photo") + '" style="width:100%;height:auto;border-radius:12px">' + (g.cap ? '<span class="val">' + esc(g.cap) + '</span>' : '') + '</div></div>'; }).join('') + '</div>' : '') +
         (f && f.extra ? '<div class="promo-hint"><svg viewBox="0 0 40 28" aria-hidden="true"><path d="M3 5 C 12 1, 20 3, 27 9 C 32 13, 35 18, 35 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><path d="M29.5 19.5 L 35 24 L 35.5 17" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>check out my page!</span></div>' : '') + '<div class="dm">' + (f && f.extra ? f.extra : (f ? "" : (r.prof && !LINKS.tasteTester ? '<a class="pill" href="#contact-professor">Sign up to taste</a>' : '<a class="pill" href="' + url + '" target="_blank" rel="noopener">' + (r.prof ? "Sign up to taste" : "Apply for this seat") + '</a>'))) + '<a class="pill ghost" href="' + (r.officer ? "#team" : "#chefs") + '">' + (r.officer ? "Founders page" : "All chefs") + '</a></div>' +
       '</div>';
   }
