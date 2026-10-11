@@ -896,7 +896,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   <section style="padding-top:1.5rem">
     <div class="wrap">
       <a class="card bar founder linkcard" href="#chef-founder">
-        <div class="avatar" aria-hidden="true">EJ</div>
+        <div class="avatar" aria-hidden="true"><img src="officers/evelyn-president.jpg" alt=""></div>
         <div>
           <p class="role">Founder · Resident foodie</p>
           <h3>Evelyn Jones</h3>
@@ -992,7 +992,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   <section style="padding-top:1.5rem">
     <div class="wrap">
       <a class="card bar founder linkcard" href="#chef-founder">
-        <div class="avatar" aria-hidden="true">EJ</div>
+        <div class="avatar" aria-hidden="true"><img src="officers/evelyn-president.jpg" alt=""></div>
         <div>
           <p class="role">Founder · Resident foodie</p>
           <h3>Evelyn Jones</h3>
@@ -1702,7 +1702,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     { key: "head-chef", eyebrow: "FEATURED HEAD CHEF" },
     { key: "pastry-chef", eyebrow: "FEATURED PASTRY CHEF" },
     { key: "beli-connoisseur", eyebrow: "OUR BELI CONNOISSEUR" },
-    { key: "taste-tester", eyebrow: "FEATURED BLIND TASTE TESTER" }
+    { key: "taste-tester", eyebrow: "FEATURED BLIND TASTE TESTER" },
+    { key: "founder", eyebrow: "OUR RESIDENT FOODIE", name: "Resident Foodie" }
   ];
   var cake = document.getElementById("cake"), plate = cake.querySelector(".pcake"),
       cakeBase = document.getElementById("pc-base"), cakeSlice = document.getElementById("pc-slice"), wedge = document.getElementById("slice"),
@@ -1762,7 +1763,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
     served++;
     document.getElementById("st-num").textContent = "SLICE #" + String(served).padStart(3, "0");
     document.getElementById("st-eyebrow").textContent = p.g.eyebrow;
-    document.getElementById("st-title").textContent = f ? f.name : s.label;
+    document.getElementById("st-title").textContent = p.g.name || (f ? f.name : s.label);
     var body;
     if (f) body = (f.dish ? "Signature dish: " + f.dish + ". " : "") + (f.year || r.label);
     else if (r.prof) body = "A USC professor joins our blind tastings each semester. This seat is open for Spring 2027.";
@@ -1890,7 +1891,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   });
   SEATS["beli-connoisseur"] = { role: { label: "Beli Connoisseur", about: "The Beli Connoisseur is our restaurant expert. They pick the spots for every Saturday Beli Food Tour across LA, keep the club's Beli list and rankings up to date, and lead the table talk on what's on the plate.", sessions: "Leads Saturday tours", link: "join", crown: true, tilesHead: "Their picks", tiles: [["Favorite signature dish", "From a restaurant they've eaten at"], ["Best aesthetic plate", "The most beautiful plate they've seen"], ["Most beautiful restaurant", "The prettiest room they've eaten in"]] }, label: "Beli Connoisseur", f: FILLED["beli-connoisseur"] };
   SEATS["founder"] = { role: { label: "Founder",
-      facts: function (f) { return [["School", "USC Leventhal"], ["Cooking since", "5 years old"], ["Favorite food genre", (f && f.genre) || "Coming soon"]]; },
+      facts: function (f) { return [["Role", "President"], ["Pillar", "Execute, don\u2019t let anything hold you back"], ["School", "USC Leventhal"], ["Cooking since", "5 years old"], ["Favorite food genre", (f && f.genre) || "Coming soon"]]; },
       side: function (f) { return [["Favorite kitchen gadget", (f && f.gadget) || "Coming soon", "officers/ninja-pressure-cooker.jpg", "https://www.ninjakitchen.com/pressure-cookers/"], ["Kitchen item wishlist", (f && f.wishlist) || "Coming soon", "officers/ankarsrum-mixer.jpg", "https://www.ankarsrum.com/us/product-category/stand-mixers/"]]; },
       tilesHead: "Their favorites", tileEm: "Coming soon",
       tiles: [["Favorite restaurant", "Where they'd take you to eat in LA", "restaurant"], ["Signature dish", "What they love to cook at home", "dish"], ["Best plate", "The best plate they've ever photographed", "plate"], ["Favorite cooking show", "What's on their watch list", "show"]] },
