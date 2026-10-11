@@ -685,6 +685,8 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 .pf-extra { padding: 1rem 1.2rem; border-color: var(--gold); background: linear-gradient(120deg, rgba(214,168,67,.16), rgba(214,168,67,.04)); }
 .pf-extra .eyebrow { font-size: .72rem; }
 .pf-extra-v { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin-top: .25rem; }
+.promo-hint { display: flex; align-items: flex-end; gap: .25rem; margin: 0 0 .05rem .4rem; font-family: "Dancing Script", cursive; font-weight: 700; color: var(--gold); font-size: 1.2rem; transform: rotate(-3deg); }
+.promo-hint svg { width: 32px; height: 26px; }
 .dishes.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .dish .val { font-family: var(--font-display); font-weight: 700; color: var(--gold); font-size: .95rem; margin-top: .45rem; }
 @media (max-width: 900px) { .pf-side { max-width: 22rem; width: 100%; } .pf-side .pf-photo { max-width: none; } }
@@ -1820,6 +1822,24 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       show: "MasterChef India", showImg: "officers/mci.jpg", showLink: "https://www.instagram.com/masterchefindiaofficial/?hl=en", showLinkLabel: "MasterChef India on Instagram \u2192", showImgLink: "https://www.sonyliv.com/shows/masterchef-india-1700001090", showStreams: [{ mark: "LIV", color: "#0B1B33", name: "SonyLIV", url: "https://www.sonyliv.com/shows/masterchef-india-1700001090" }],
       wishlist: "Pancake printer", wishlistImg: "officers/pancakebot.jpg", wishlistLink: "https://ecohomeoffice.com/products/pancakebot-2-0-3d-pancake-food-printer-nonstick-electric-griddle-with-temperature-control-dispenser-bottle-sd-card-pancake-painter-software-and-recipe-book-black", wishlistLinkLabel: "PancakeBot 2.0 \u2192"
     },
+    "head-chef-01": {
+      name: "Jason Che", initials: "JC", role: "Head Chef \u00b7 Founding cohort",
+      photo: "portfolio/jason/kitchen.jpg",
+      bio: "Jason taught himself to cook in 6th grade and never stopped. Born in Honolulu and raised in Tokyo, he now studies Economics at USC, has worked briefly at a semi-fine dining restaurant, and keeps a running kitchen diary on his Instagram. He joined Chopped SC to cook with, and for, like-minded people.",
+      facts: [["Year", "Senior, Economics"], ["Cooking since", "6th grade"], ["Favorite food", "Too hard of a question"]],
+      restaurant: "Pigya",
+      show: "Culinary Class Wars", showImg: "portfolio/jason/culinary-class-wars.jpg", showImgLink: "https://www.netflix.com/title/81728365", showStreams: [{ mark: "N", color: "#E50914", name: "Netflix", url: "https://www.netflix.com/title/81728365" }],
+      extra: '<a class="pill gold" href="https://www.notesfrommykitchen-jasonche.com" target="_blank" rel="noopener">Food portfolio \u2192</a>'
+    },
+    "pastry-chef-01": {
+      name: "Jaden Armond", initials: "JA", role: "Pastry Chef \u00b7 Founding cohort",
+      photo: "portfolio/jaden/hero.jpg",
+      bio: "Jaden has run JJ\u2019s House of Sweets since age 16, baking custom desserts for individuals and events. Three years at Raising Cane\u2019s as a Certified Trainer sharpened their kitchen operations, and they hold ProStart certification (since 2022) and a California Food Handler Card.",
+      facts: [["Year", "Senior, Law, History and Culture"], ["Baking since", "Age 16"], ["Favorite food", "Italian or Southern"]],
+      restaurant: "Annie\u2019s Soul Delicious",
+      show: "Cupcake Wars",
+      extra: '<a class="pill gold" href="https://www.jjshouseofsweets.com" target="_blank" rel="noopener">JJ\u2019s House of Sweets \u2192</a>'
+    }
   };
   var ROLES = {
     "head-chef":   { label: "Head Chef", n: 15, box: "seats-head", about: "Head Chefs are chosen by interview with a food portfolio. They teach Chef Lab sessions to Sous Chefs and cook alongside a 15-chef cohort. Their food photos are featured here with full credit.", sessions: "Teaches Chef Lab", link: "join", tilesHead: "Their favorites",
@@ -1929,7 +1949,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
           var pimg = x[2] && f && f[x[2] + "Img"];
           return '<div class="dish' + ((val || pimg) ? ' has' : '') + '"><div><strong>' + esc(x[0]) + '</strong>' + (val ? '<span class="val">' + esc(val) + '</span>' : (x[1] ? '<span>' + esc(x[1]) + '</span>' : '')) + ((val || pimg) ? '' : '<em>' + esc(r.tileEm || "Photo coming soon") + '</em>') + (pimg ? (f && f[x[2] + "ImgLink"] ? '<a href="' + esc(f[x[2] + "ImgLink"]) + '" target="_blank" rel="noopener" title="Open">' : '') + '<img src="' + esc(pimg) + '" alt="' + esc(x[0]) + '" style="width:100%;height:auto;border-radius:12px;margin:.5rem 0">' + (f && f[x[2] + "ImgLink"] ? '</a>' : '') : '') + (f && x[2] && f[x[2] + "Link"] ? '<a class="pill gold" href="' + esc(f[x[2] + "Link"]) + '" target="_blank" rel="noopener">' + esc(f[x[2] + "LinkLabel"] || "Take a look \u2192") + '</a>' : '') + (f && x[2] && f[x[2] + "Streams"] ? '<p class="streams"><b>Streaming on</b> ' + f[x[2] + "Streams"].map(function (st) { return '<a class="stream-chip" href="' + esc(st.url) + '" target="_blank" rel="noopener" title="Watch on ' + esc(st.name) + '"><i style="background:' + esc(st.color) + '">' + esc(st.mark) + '</i>' + esc(st.name) + '</a>'; }).join('') + '</p>' : '') + '</div></div>';
         }).join("") + '</div>') +
-        '<div class="dm">' + (f && f.extra ? f.extra : (f ? "" : (r.prof && !LINKS.tasteTester ? '<a class="pill" href="#contact-professor">Sign up to taste</a>' : '<a class="pill" href="' + url + '" target="_blank" rel="noopener">' + (r.prof ? "Sign up to taste" : "Apply for this seat") + '</a>'))) + '<a class="pill ghost" href="' + (r.officer ? "#team" : "#chefs") + '">' + (r.officer ? "Founders page" : "All chefs") + '</a></div>' +
+        (f && f.extra ? '<div class="promo-hint"><svg viewBox="0 0 40 28" aria-hidden="true"><path d="M3 5 C 12 1, 20 3, 27 9 C 32 13, 35 18, 35 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><path d="M29.5 19.5 L 35 24 L 35.5 17" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>check out my page!</span></div>' : '') + '<div class="dm">' + (f && f.extra ? f.extra : (f ? "" : (r.prof && !LINKS.tasteTester ? '<a class="pill" href="#contact-professor">Sign up to taste</a>' : '<a class="pill" href="' + url + '" target="_blank" rel="noopener">' + (r.prof ? "Sign up to taste" : "Apply for this seat") + '</a>'))) + '<a class="pill ghost" href="' + (r.officer ? "#team" : "#chefs") + '">' + (r.officer ? "Founders page" : "All chefs") + '</a></div>' +
       '</div>';
   }
 
