@@ -1697,7 +1697,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
 
   // ===== Cake: tap and a slice comes out with a featured member of the brigade =====
   // Tap again: the slice slides back in, the cake turns on its plate, and a new slice comes out somewhere else.
-  // Features a random Head Chef, Pastry Chef, Beli Connoisseur or Blind Taste Tester. Seats with a real person (FILLED below) come first.
+  // Features a random Head Chef, Pastry Chef, Beli Connoisseur or Blind Taste Tester, every seat in the pool, open or filled. Seats with a real person (FILLED below) come up a little more often.
   var FEATURE_GROUPS = [
     { key: "head-chef", eyebrow: "FEATURED HEAD CHEF" },
     { key: "pastry-chef", eyebrow: "FEATURED PASTRY CHEF" },
@@ -1724,7 +1724,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
       var g = FEATURE_GROUPS[Math.floor(Math.random() * FEATURE_GROUPS.length)];
       var ids = Object.keys(SEATS).filter(function (id) { return id === g.key || id.indexOf(g.key + "-") === 0; });
       var filled = ids.filter(function (id) { return SEATS[id].f; });
-      var pool = filled.length ? filled : ids;
+      var pool = filled.concat(ids);   // every seat can come up; filled seats sit in the pool twice
       var id = pool[Math.floor(Math.random() * pool.length)];
       if (id && id !== lastPick) { lastPick = id; return { id: id, g: g }; }
     }
@@ -1960,7 +1960,7 @@ html, body { overflow-x: hidden; overflow-x: clip; }
   var GLASS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14l-7 9z"/><path d="M12 12v8"/><path d="M8 21h8"/></svg>';
   var TIPSY_PHOTOS = ["tipsy/evelyn-bar.jpeg", "tipsy/cocktail-rd.jpeg", "tipsy/service.jpeg", "tipsy/mezcal-purple-coupe.jpg", "tipsy/mezcal-orange-coupe.jpg", "tipsy/mezcal-glass-statue.jpg", "tipsy/evelyn-bar-2.jpg"];
   var tp = document.getElementById("tipsy-photos");
-  ["Behind the bar", "Cocktail R&D", "Bar in service", "Mezcal service at Victorioso", "Signature coupe", "Tasting event pour", "The home bar cart"].forEach(function (cap, i) {
+  ["Behind the bar", "Cocktail R&D", "Bar in service", "Mezcal service at Victorioso", "Signature coupe", "Tasting event pour", "Thee Tipsy Barmaid"].forEach(function (cap, i) {
     var d = document.createElement("div"); d.className = "ph";
     d.innerHTML = TIPSY_PHOTOS[i] ? '<img src="' + esc(TIPSY_PHOTOS[i]) + '" alt="' + cap + '" style="width:100%;height:100%;object-fit:cover;border-radius:12px">' : '<div>' + GLASS + cap + '<br><small>Photo coming soon</small></div>';
     if (TIPSY_PHOTOS[i]) d.style.padding = "0";
